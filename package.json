@@ -7,14 +7,17 @@
   "license": "UNLICENSED",
   "type": "module",
   "scripts": {
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "oxlint --type-aware src/",
+    "prelint": "pnpm format",
+
     "build": "nest build",
     "deploy": "nest deploy",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start --env-file .env",
     "start:dev": "nest start --watch --env-file .env",
     "start:debug": "nest start --debug --watch --env-file .env",
     "start:prod": "node dist/main",
-    "lint": "oxlint --type-aware src/ test/",
+
     "test": "vitest run",
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",

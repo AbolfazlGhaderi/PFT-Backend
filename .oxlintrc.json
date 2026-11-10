@@ -1,10 +1,38 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
   "rules": {
-    "typescript/no-explicit-any": "off",
-    "typescript/no-floating-promises": "error"
+    // General
+    "no-console": "warn",
+    "no-debugger": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "no-duplicate-imports": "error",
+
+    // TypeScript
+    "typescript/no-explicit-any": "warn",
+    "typescript/no-non-null-assertion": "error",
+    "typescript/no-wrapper-object-types": "error",
+    "typescript/no-empty-object-type": "error",
+    "typescript/ban-ts-comment": "error",
+    "typescript/no-unnecessary-type-assertion": "error",
+    "typescript/no-unused-vars": "warn",
+    "typescript/no-unsafe-return": "error",
+    "typescript/no-unsafe-call": "error",
+
+    // Type Safety
+    "typescript/no-unsafe-assignment": "warn",
+    "typescript/no-unsafe-member-access": "warn",
+    "typescript/await-thenable": "error",
+
+    // Async / Promise
+    "typescript/no-floating-promises": "error",
+    "typescript/no-misused-promises": "warn",
+
   },
   "env": {
     "node": true
+  },
+  "options": {
+    "typeAware": true
   }
 }
