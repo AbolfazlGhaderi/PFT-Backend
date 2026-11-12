@@ -18,6 +18,16 @@
     "skipLibCheck": true,
     "strict": true,
     "strictPropertyInitialization": false,
-    "types": ["vitest/globals", "node"]
+    "types": ["vitest/globals", "node"],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@app/*": [ "./src/app/*" ],
+      "@plugins": [ "./src/app/plugins/index.js" ],
+      "@plugins/*": [ "./src/app/plugins/*" ],
+      "@common/*": [ "./src/common/*" ],
+      "@configs": [ "./src/configs/index.js" ],
+      "@configs/*": [ "./src/configs/*" ],
+      "@types": ["./src/common/types.ts"],
+    }
   }
 }

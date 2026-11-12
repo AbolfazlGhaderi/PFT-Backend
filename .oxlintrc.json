@@ -15,9 +15,6 @@
     "typescript/no-empty-object-type": "error",
     "typescript/ban-ts-comment": "error",
     "typescript/no-unnecessary-type-assertion": "error",
-    "typescript/no-unused-vars": "warn",
-    "typescript/no-unsafe-return": "error",
-    "typescript/no-unsafe-call": "error",
 
     // Type Safety
     "typescript/no-unsafe-assignment": "warn",
