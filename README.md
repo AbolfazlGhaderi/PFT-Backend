@@ -1,126 +1,233 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+## Coding Standards & Conventions
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+All developers must follow these rules when writing or modifying code. The goal is to keep the codebase consistent, readable, maintainable, and easy to extend.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### 1. Naming Conventions
 
-## Description
+#### 1.1. Folders & Files
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- All folder names must use `kebab-case`.
+- All file names must use `kebab-case`.
+- File names must include a suffix that identifies their purpose or type.
 
-## Project setup
+Examples:
 
-```bash
-$ pnpm install
+```text
+src/
+├── common/
+│   ├── constants/
+│   ├── enums/
+│   ├── interfaces/
+│   ├── types/
+└── configs/
+    ├── logger.config.ts
+    └── database.config.ts
 ```
 
-## Compile and run the project
+File naming examples:
 
-```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+```text
+user-status.enum.ts
+user.interface.ts
+user.type.ts
+user.service.ts
+user.controller.ts
+user.module.ts
+user.constants.ts
 ```
 
-## Run tests
+#### 1.2. Classes
 
-```bash
-# unit tests
-$ pnpm run test
+All classes must use `PascalCase`.
 
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+```typescript
+class UserService {}
+class DatabaseConnection {}
+class AuthenticationGuard {}
 ```
 
-## Deployment
+#### 1.3. Methods & Functions
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+All methods and functions must use `camelCase`.
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+```typescript
+function getUserById() {}
 
-```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
+class UserService {
+    createUser() {}
+    updateUserStatus() {}
+    deleteUser() {}
+}
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+#### 1.4. Constants
 
-## Observability
+Shared and global constants must use `UPPER_SNAKE_CASE`.
 
-In production applications, observability is essential for understanding how your system behaves, detecting issues early, and maintaining reliable performance.
+Use underscores (`_`) to separate words.
 
-[NestJS Observe](https://observe.nestjs.com) automatically instruments your NestJS application, giving you deep visibility into your system with minimal setup:
-
-- **Distributed tracing:** Follow requests across services and understand how they flow through your system.
-- **Waterfall analysis:** Visualize request execution and identify slow operations, bottlenecks, and unexpected delays.
-- **Performance analysis:** Analyze application performance in real time and quickly pinpoint areas that need optimization.
-- **Metrics:** Track key application and infrastructure metrics to understand system health and performance trends.
-- **Logging:** Centralize and correlate logs with traces and other telemetry to make debugging easier.
-- **Error tracking:** Detect errors quickly and investigate their root causes with the surrounding context.
-- **SLA monitoring:** Track service-level objectives and identify when your application is approaching or exceeding defined thresholds.
-- **Alarms and alerts:** Set up alerts for critical errors, performance degradation, SLA violations, and other anomalies so your team can react quickly.
-
-This project is already instrumented. To connect it, run this and approve the code it prints at [observe.nestjs.com/link](https://observe.nestjs.com/link) - signing up for free if you have no account:
-
-```bash
-$ npx @nestjs/observe link
+```typescript
+const MAX_RETRY_COUNT = 5
+const DEFAULT_PAGE_SIZE = 20
+const API_BASE_URL = 'https://example.com'
 ```
 
-It writes the app key and secret into `.env` and makes every `nest start` script (`start`, `start:dev`, `start:debug`) load it. In production, set `OBSERVE_APP_KEY` and `OBSERVE_APP_SECRET` in the environment instead.
+Local variables declared with `const` must still use `camelCase`.
 
-Or do it by hand: create an application and an API key at [observe.nestjs.com](https://observe.nestjs.com), and set the pair as `OBSERVE_APP_KEY` and `OBSERVE_APP_SECRET` in the environment the app runs in.
+```typescript
+const userName = 'John'
+const maxRetryCount = 5
+```
 
-The free plan needs no payment details and covers 300,000 events a month. You can also browse the [live demo](https://www.observe-demo.nestjs.com/dashboard) first - the whole dashboard over a busy service's data, with nothing to install.
+#### 1.5. Enums
 
-## Resources
+All enum names must end with the `Enum` suffix.
 
-Check out a few resources that may come in handy when working with NestJS:
+```typescript
+enum UserStatusEnum {
+    ACTIVE = 1,
+    INACTIVE = 2,
+    SUSPENDED = 3,
+}
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Auto-instrument your application with [NestJS Observe](https://observe.nestjs.com). Distributed tracing, metrics, and logging made easy. Error tracking and performance monitoring for your NestJS applications.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+#### 1.6. Types
 
-## Support
+All custom TypeScript type names must end with the `T` suffix.
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+The `T` suffix must always be placed at the end of the name.
 
-## Stay in touch
+```typescript
+type UserT = {
+    id: number
+    username: string
+}
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+type UserStatusT = 'active' | 'inactive'
+```
 
-## License
+#### 1.7. Interfaces
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+All interface names must end with the `I` suffix.
+
+The `I` suffix must always be placed at the end of the name.
+
+```typescript
+interface UserI {
+    id: number
+    username: string
+}
+
+interface UserRepositoryI {
+    findById(id: number): Promise<UserI | null>
+}
+```
+
+---
+
+### 2. Static Values & Magic Numbers
+
+Avoid hardcoding values that have a specific meaning or may need to be reused.
+
+Use the appropriate structure to define shared values:
+
+- Constants
+- Enums
+- Configuration files
+- Environment variables
+
+**Incorrect:**
+
+```typescript
+if (user.status === 1) {
+    // ...
+}
+
+if (retryCount > 5) {
+    // ...
+}
+
+setTimeout(callback, 3000)
+```
+
+**Correct:**
+
+```typescript
+const MAX_RETRY_COUNT = 5
+const REQUEST_TIMEOUT = 3000
+
+if (user.status === UserStatusEnum.ACTIVE) {
+    // ...
+}
+
+if (retryCount > MAX_RETRY_COUNT) {
+    // ...
+}
+
+setTimeout(callback, REQUEST_TIMEOUT)
+```
+
+Do not create constants for every literal value. Values that are part of normal language syntax or have no independent meaning do not need to be extracted.
+
+---
+
+### 3. Type Safety
+
+- Avoid using `any`. Use `unknown` when the type is not known.
+- Always validate and narrow `unknown` values before using them.
+- Prefer proper TypeScript types over type assertions.
+- Avoid unnecessary use of `as`.
+- Do not use `@ts-ignore` or disable lint rules without a valid reason.
+- Validate all data received from external sources.
+
+---
+
+### 4. Code Quality
+
+- Avoid code duplication. Extract shared logic when appropriate.
+- Keep functions and methods small and focused on a single responsibility.
+- Avoid deeply nested conditions and unnecessary complexity.
+- Use meaningful names for variables, functions, methods, and classes.
+- Write comments to explain why something is done, not simply what the code does.
+- Avoid unnecessary abstractions and overengineering.
+- Handle errors explicitly and appropriately.
+- Avoid circular dependencies.
+
+---
+
+### 5. Configuration Management
+
+- All environment-specific settings must be managed through configuration files or environment variables.
+- Do not access `process.env` directly throughout the application.
+- Use a centralized configuration layer ( EnvLoaderService ) to access environment variables.
+- Never hardcode environment-specific values.
+- Keep configuration files inside the `configs` directory.
+
+---
+
+### 6. Imports & Dependencies
+
+- Use configured path aliases instead of long relative import paths whenever possible.
+- Avoid unnecessary dependencies.
+- Avoid circular imports.
+- Import only what is needed.
+- Keep module dependencies clear and organized.
+
+---
+
+### 7. Logging & Error Handling
+
+- Do not use `console.log`, `console.error`, or other console methods in application code.
+- Use the centralized logging service.
+- Use meaningful log messages.
+- Do not silently catch or ignore errors.
+
+---
+
+### 8. General Rules
+
+- Follow the existing project structure and conventions.
+- Do not introduce new patterns without a clear reason.
+- Keep changes focused and avoid unrelated modifications.
+- Ensure code passes TypeScript checks and lint rules before committing.
+- Keep the code readable and maintainable rather than optimizing prematurely.

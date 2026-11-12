@@ -25,6 +25,12 @@
     "typescript/no-floating-promises": "error",
     "typescript/no-misused-promises": "warn",
 
+    "unicorn/filename-case": [
+        "error",
+        {
+          "case": "kebabCase"
+        }
+    ],
   },
   "env": {
     "node": true
