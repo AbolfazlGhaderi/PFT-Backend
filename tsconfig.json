@@ -22,14 +22,18 @@
     "paths": {
       "@/*": ["./src/*"],
       "@app/*": [ "./src/app/*" ],
+
       "@plugins": [ "./src/app/plugins/index.ts" ],
       "@plugins/*": [ "./src/app/plugins/*" ],
 
       "@common/*": [ "./src/common/*" ],
       "@enums": [ "./src/common/enums/index.ts" ],
+      "@constants": [ "./src/common/constants/index.ts" ],
 
       "@configs": [ "./src/configs/index.ts" ],
       "@configs/*": [ "./src/configs/*" ],
+
+
       "@types": ["./src/common/types.ts"],
     }
   }

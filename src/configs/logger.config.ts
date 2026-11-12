@@ -1,3 +1,4 @@
+import { CLS_KEYS } from '@constants';
 import { LoggerConfig } from 'logger-nestjs';
 
 export const DEFAULT_LOGGER_CONFIG = {
@@ -18,5 +19,5 @@ export const DEFAULT_LOGGER_CONFIG = {
       },
     },
   ],
-  clsRequestIdKey: 'x-in-request-id',
+  clsRequestIdKey: CLS_KEYS.REQUEST_ID,
 } as LoggerConfig;
