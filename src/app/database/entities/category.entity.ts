@@ -20,6 +20,9 @@ export class CategoryEntity {
   @Property({ fieldName: 'Value', type: 'varchar', length: 150 })
   value!: string;
 
+  @Property({ fieldName: 'Type', type: 'smallint', nullable: false })
+  type!: number;
+
   @ManyToOne(() => CategoryEntity, { nullable: true, fieldName: 'ParentId', index: true, type: 'bigint' })
   parent?: Rel<CategoryEntity>;
 

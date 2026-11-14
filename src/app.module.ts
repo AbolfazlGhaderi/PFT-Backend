@@ -8,6 +8,7 @@ import { RequestLoggerMiddleware } from '@middlewares';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { DEFAULT_LOGGER_CONFIG, CLS_MODULE_CONFIG, THROTTLER_CONFIG } from '@configs';
 import { DatabaseModule } from '@database';
+import { InitializerService } from './app/plugins/initial/initializer.service.js';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { DatabaseModule } from '@database';
     DatabaseModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, InitializerService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

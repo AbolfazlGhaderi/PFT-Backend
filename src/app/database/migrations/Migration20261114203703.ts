@@ -1,18 +1,18 @@
 import { Migration } from '@mikro-orm/migrations';
 
-export class Migration20261114151345 extends Migration {
+export class Migration20261114203703 extends Migration {
 
-  override name = 'Migration20261114151345';
+  override name = 'Migration20261114203703';
 
   override up(): void | Promise<void> {
-    this.addSql(`create table "Categories" ("Id" bigserial primary key, "Key" varchar(100) not null, "Value" varchar(150) not null, "ParentId" bigint null, "Description" text null, "CreatedAt_UTC" timestamptz null default CURRENT_TIMESTAMP, "CreatedBy" bigint null, "ModifiedAt_UTC" timestamptz null default CURRENT_TIMESTAMP, "ModifiedBy" bigint null, "DeletedAt_UTC" timestamptz null);`);
+    this.addSql(`create table "Categories" ("Id" bigserial primary key, "Key" varchar(100) not null, "Value" varchar(150) not null, "Type" smallint not null, "ParentId" bigint null, "Description" text null, "CreatedAt_UTC" timestamptz null default CURRENT_TIMESTAMP, "CreatedBy" bigint null, "ModifiedAt_UTC" timestamptz null default CURRENT_TIMESTAMP, "ModifiedBy" bigint null, "DeletedAt_UTC" timestamptz null);`);
     this.addSql(`create index "Categories_ParentId_index" on "Categories" ("ParentId");`);
     this.addSql(`alter table "Categories" add constraint "Categories_Key_DeletedAt_UTC_unique" unique ("Key", "DeletedAt_UTC");`);
 
     this.addSql(`create table "Currencies" ("Id" bigserial primary key, "Title" varchar(100) not null, "Code" varchar(5) not null, "Symbol" varchar(10) null, "DecimalPlaces" smallint not null default 2, "Description" text null, "CreatedAt_UTC" timestamptz null default CURRENT_TIMESTAMP, "CreatedBy" bigint null, "ModifiedAt_UTC" timestamptz null default CURRENT_TIMESTAMP, "ModifiedBy" bigint null, "DeletedAt_UTC" timestamptz null);`);
     this.addSql(`alter table "Currencies" add constraint "Currencies_Code_DeletedAt_UTC_unique" unique ("Code", "DeletedAt_UTC");`);
 
-    this.addSql(`create table "User" ("Id" bigserial primary key, "PhoneNumber" varchar(12) null, "PhoneVerifiedAt" timestamptz null, "Status" smallint not null default 1, "StatusReason" text null, "RecordKey" varchar(36) not null, "CreatedAt_UTC" timestamptz null default CURRENT_TIMESTAMP, "CreatedBy" bigint null, "ModifiedAt_UTC" timestamptz null default CURRENT_TIMESTAMP, "ModifiedBy" bigint null, "DeletedAt_UTC" timestamptz null);`);
+    this.addSql(`create table "User" ("Id" bigserial primary key, "PhoneNumber" varchar(16) null, "PhoneVerifiedAt" timestamptz null, "Status" smallint not null default 1, "StatusReason" text null, "RecordKey" varchar(36) not null, "CreatedAt_UTC" timestamptz null default CURRENT_TIMESTAMP, "CreatedBy" bigint null, "ModifiedAt_UTC" timestamptz null default CURRENT_TIMESTAMP, "ModifiedBy" bigint null, "DeletedAt_UTC" timestamptz null);`);
     this.addSql(`alter table "User" add constraint "User_PhoneNumber_DeletedAt_UTC_unique" unique ("PhoneNumber", "DeletedAt_UTC");`);
 
     this.addSql(`create table "FinancialAccounts" ("Id" bigserial primary key, "Title" varchar(100) not null, "UserId" bigint not null, "Type" smallint not null default 0, "CurrencyId" bigint not null, "InitialBalance" numeric(18,2) not null default 0, "CurrentBalance" numeric(18,2) not null default 0, "Description" text null, "IsActive" smallint not null default 1, "RecordKey" varchar(36) not null, "CreatedAt_UTC" timestamptz null default CURRENT_TIMESTAMP, "CreatedBy" bigint null, "ModifiedAt_UTC" timestamptz null default CURRENT_TIMESTAMP, "ModifiedBy" bigint null, "DeletedAt_UTC" timestamptz null);`);

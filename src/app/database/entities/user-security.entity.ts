@@ -24,7 +24,7 @@ export class UserSecurityEntity {
   passwordHash?: string;
 
   @Property({ fieldName: 'TwoFactorEnabled', type: 'tinyint', default: 0 })
-  twoFactorEnabled!: boolean;
+  twoFactorEnabled!: number;
 
   @Property({ fieldName: 'TwoFactorMethod', type: 'tinyint', comment: '1: SMS, 2: Email, 3: Authenticator', default: TwoFactorMethodsENUM.SMS })
   twoFactorMethod?: number;

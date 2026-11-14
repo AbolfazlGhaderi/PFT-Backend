@@ -1,5 +1,6 @@
 import { existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { Global, Module, Provider } from '@nestjs/common';
@@ -10,13 +11,15 @@ import { EntityName, PostgreSqlDriver } from '@mikro-orm/postgresql';
 import { EnvLoaderService } from '@plugins';
 import { EnvKeys } from '@enums';
 
-const entities = loadEntities() as EntityName<Partial<unknown>>[];
-const repositories = loadRepositories();
+const entities = (await loadEntities()) as EntityName<Partial<unknown>>[];
+const repositories = await loadRepositories();
 
 @Global()
 @Module({
   imports: [
+    // driver-specific DI tokens (PostgreSqlMikroORM) only register when the driver is known at module registration time
     MikroOrmModule.forRootAsync({
+      driver: PostgreSqlDriver,
       inject: [ClsService],
       useFactory: async (cls: ClsService) => ({
         debug: EnvLoaderService.getOrFail<boolean>(EnvKeys.DB_LOGGING),
@@ -45,7 +48,7 @@ const repositories = loadRepositories();
 })
 export class DatabaseModule {}
 
-function loadEntities(): Provider[] {
+async function loadEntities(): Promise<Provider[]> {
   const entityPath = join(import.meta.dirname, 'entities');
   const providers: Provider[] = [];
 
@@ -53,22 +56,22 @@ function loadEntities(): Provider[] {
 
   const files = readdirSync(entityPath);
 
-  files.forEach(async file => {
-    if (!file.endsWith('.entity.js') || file.startsWith('base.')) return;
+  for (const file of files) {
+    if (!file.endsWith('.entity.js') || file.startsWith('base.')) continue;
 
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const imported = await import(join(entityPath, file));
+    const imported = await import(pathToFileURL(join(entityPath, file)).href);
 
     Object.values(imported).forEach(exported => {
       if (typeof exported === 'function') {
         providers.push(exported as Provider);
       }
     });
-  });
+  }
   return providers;
 }
 
-function loadRepositories(): Provider[] {
+async function loadRepositories(): Promise<Provider[]> {
   const repositoryPath = join(import.meta.dirname, 'repositories');
   const providers: Provider[] = [];
 
@@ -76,17 +79,17 @@ function loadRepositories(): Provider[] {
 
   const files = readdirSync(repositoryPath);
 
-  files.forEach(async file => {
-    if (!file.endsWith('.repository.js') || file.startsWith('base.')) return;
+  for (const file of files) {
+    if (!file.endsWith('.repository.js') || file.startsWith('base.')) continue;
 
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const imported = await import(join(repositoryPath, file));
+    const imported = await import(pathToFileURL(join(repositoryPath, file)).href);
 
     Object.values(imported).forEach(exported => {
       if (typeof exported === 'function') {
         providers.push(exported as Provider);
       }
     });
-  });
+  }
   return providers;
 }

@@ -18,7 +18,7 @@ export class UserEntity {
   @PrimaryColumn()
   id!: number;
 
-  @Property({ fieldName: 'PhoneNumber', type: 'varchar', length: 12, nullable: true })
+  @Property({ fieldName: 'PhoneNumber', type: 'varchar', length: 16, nullable: true })
   phoneNumber?: string;
 
   @Property({ fieldName: 'PhoneVerifiedAt', type: 'datetime', nullable: true })

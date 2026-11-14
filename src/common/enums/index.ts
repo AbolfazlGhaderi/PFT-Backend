@@ -5,3 +5,4 @@ export * from './two-factor-methods.enum.js';
 export * from './transaction-type.enum.js';
 export * from './financial-account-type.enum.js';
 export * from './payment-method.enum.js';
+export * from './category-type.enum.js';

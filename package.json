@@ -22,7 +22,8 @@
     "test:debug": "vitest --inspect-brk --no-file-parallelism",
     "test:e2e": "vitest run --config ./vitest.config.e2e.ts",
     "mig:create": "mikro-orm migration:create --config dist/configs/mikro-orm-migration.config.js",
-    "mig:up": "mikro-orm migration:up --config dist/configs/mikro-orm-migration.config.js"
+    "mig:up": "mikro-orm migration:up --config dist/configs/mikro-orm-migration.config.js",
+    "initial": "node dist/app/plugins/initial/main.js"
   },  
   "dependencies": {
     "@mikro-orm/cli": "^7.2.8",
