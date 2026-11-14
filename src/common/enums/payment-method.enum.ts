@@ -1,0 +1,13 @@
+export enum PaymentMethodENUM {
+  CASH = 0,
+  CARD = 1,
+  ONLINE_PAYMENT,
+  CARD_TO_CARD,
+  BRIDGE,
+  PAYA,
+  SATNA,
+  IN_BANK,
+  BANK_TRANSFER,
+  WALLET,
+  BLUE_TO_BLUE,
+}

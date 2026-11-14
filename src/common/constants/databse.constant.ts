@@ -4,6 +4,8 @@ export const TABLE_NAMES = {
   ACCOUNT: 'Accounts',
   CURRENCY: 'Currencies',
   FINANCIAL_ACCOUNT: 'FinancialAccounts',
+  CATEGORY: 'Categories',
+  TRANSACTION: 'Transactions',
   COMPANY: 'Companies',
   COMPANY_ACCOUNT: 'CompanyAccounts',
   COMPANY_CONFIG: 'CompanyConfigs',

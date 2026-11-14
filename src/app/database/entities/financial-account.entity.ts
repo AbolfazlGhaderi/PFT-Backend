@@ -1,10 +1,12 @@
 import { randomUUID } from 'crypto';
 import { TABLE_NAMES } from '@constants';
 import { UserEntity } from './user.entity.js';
+import { FinancialAccountTypeENUM } from '@enums';
 import { CurrencyEntity } from './currency.entity.js';
-import { EntityRepositoryType, type Rel } from '@mikro-orm/postgresql';
+import { TransactionEntity } from './transaction.entity.js';
 import { ApplyDeletedFilter, PrimaryColumn } from '@decorators';
-import { Entity, ManyToOne, Property, Unique } from '@mikro-orm/decorators/legacy';
+import { EntityRepositoryType, Collection, type Rel } from '@mikro-orm/postgresql';
+import { Entity, ManyToOne, OneToMany, Property, Unique } from '@mikro-orm/decorators/legacy';
 import { FinancialAccountRepository } from '@database/repositories/financial-account.repository.js';
 
 @Entity({ tableName: TABLE_NAMES.FINANCIAL_ACCOUNT, repository: () => FinancialAccountRepository })
@@ -22,7 +24,7 @@ export class FinancialAccountEntity {
   @ManyToOne(() => UserEntity, { nullable: false, fieldName: 'UserId', index: true, type: 'bigint' })
   user!: Rel<UserEntity>;
 
-  @Property({ fieldName: 'Type', type: 'smallint' })
+  @Property({ fieldName: 'Type', type: 'smallint', default: FinancialAccountTypeENUM.BANK })
   type!: number;
 
   @ManyToOne(() => CurrencyEntity, { nullable: false, fieldName: 'CurrencyId', index: true, type: 'bigint' })
@@ -36,6 +38,9 @@ export class FinancialAccountEntity {
 
   @Property({ fieldName: 'Description', type: 'text', nullable: true })
   description?: string;
+
+  @Property({ fieldName: 'IsActive', type: 'smallint', default: 1 })
+  isActive!: number; // 0 or 1
 
   @Property({ onCreate: () => randomUUID(), fieldName: 'RecordKey', nullable: false, type: 'varchar', length: 36 })
   recordKey?: string;
@@ -61,4 +66,10 @@ export class FinancialAccountEntity {
 
   @Property({ fieldName: 'DeletedAt_UTC', type: 'timestamptz', nullable: true })
   deletedAt?: Date;
+
+  @OneToMany(() => TransactionEntity, transaction => transaction.account)
+  transactions = new Collection<TransactionEntity>(this);
+
+  @OneToMany(() => TransactionEntity, transaction => transaction.toAccount)
+  incomingTransfers = new Collection<TransactionEntity>(this);
 }

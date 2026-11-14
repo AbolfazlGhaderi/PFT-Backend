@@ -5,6 +5,232 @@
   ],
   "tables": [
     {
+      "name": "Categories",
+      "schema": "public",
+      "columns": {
+        "CreatedAt_UTC": {
+          "name": "CreatedAt_UTC",
+          "type": "timestamptz(6)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": 6,
+          "precision": null,
+          "scale": null,
+          "default": "CURRENT_TIMESTAMP",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "datetime"
+        },
+        "CreatedBy": {
+          "name": "CreatedBy",
+          "type": "bigint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "bigint"
+        },
+        "DeletedAt_UTC": {
+          "name": "DeletedAt_UTC",
+          "type": "timestamptz(6)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": 6,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "datetime"
+        },
+        "Description": {
+          "name": "Description",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "Id": {
+          "name": "Id",
+          "type": "bigint",
+          "unsigned": false,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "bigint"
+        },
+        "Key": {
+          "name": "Key",
+          "type": "varchar(100)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": true,
+          "length": 100,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "string"
+        },
+        "ModifiedAt_UTC": {
+          "name": "ModifiedAt_UTC",
+          "type": "timestamptz(6)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": 6,
+          "precision": null,
+          "scale": null,
+          "default": "CURRENT_TIMESTAMP",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "datetime"
+        },
+        "ModifiedBy": {
+          "name": "ModifiedBy",
+          "type": "bigint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "bigint"
+        },
+        "ParentId": {
+          "name": "ParentId",
+          "type": "bigint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "bigint"
+        },
+        "Value": {
+          "name": "Value",
+          "type": "varchar(150)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": 150,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "string"
+        }
+      },
+      "indexes": [
+        {
+          "columnNames": [
+            "Key",
+            "DeletedAt_UTC"
+          ],
+          "composite": true,
+          "constraint": true,
+          "keyName": "Categories_Key_DeletedAt_UTC_unique",
+          "primary": false,
+          "unique": true
+        },
+        {
+          "columnNames": [
+            "ParentId"
+          ],
+          "composite": false,
+          "constraint": false,
+          "keyName": "Categories_ParentId_index",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "Id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "keyName": "Categories_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "triggers": [],
+      "foreignKeys": {
+        "Categories_ParentId_foreign": {
+          "columnNames": [
+            "ParentId"
+          ],
+          "constraintName": "Categories_ParentId_foreign",
+          "localTableName": "public.Categories",
+          "referencedColumnNames": [
+            "Id"
+          ],
+          "referencedTableName": "public.Categories",
+          "deleteRule": "set null"
+        }
+      },
+      "comment": null
+    },
+    {
       "name": "Currencies",
       "schema": "public",
       "columns": {
@@ -364,6 +590,23 @@
           "enumItems": [],
           "mappedType": "decimal"
         },
+        "IsActive": {
+          "name": "IsActive",
+          "type": "smallint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "1",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "smallint"
+        },
         "ModifiedAt_UTC": {
           "name": "ModifiedAt_UTC",
           "type": "timestamptz(6)",
@@ -443,7 +686,7 @@
           "length": null,
           "precision": null,
           "scale": null,
-          "default": null,
+          "default": "0",
           "comment": null,
           "collation": null,
           "enumItems": [],
@@ -531,6 +774,444 @@
           ],
           "constraintName": "FinancialAccounts_UserId_foreign",
           "localTableName": "public.FinancialAccounts",
+          "referencedColumnNames": [
+            "Id"
+          ],
+          "referencedTableName": "public.User"
+        }
+      },
+      "comment": null
+    },
+    {
+      "name": "Transactions",
+      "schema": "public",
+      "columns": {
+        "AccountId": {
+          "name": "AccountId",
+          "type": "bigint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "bigint"
+        },
+        "Amount": {
+          "name": "Amount",
+          "type": "numeric(30,8)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": 30,
+          "scale": 8,
+          "default": "0",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "decimal"
+        },
+        "CategoryId": {
+          "name": "CategoryId",
+          "type": "bigint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "bigint"
+        },
+        "CreatedAt_UTC": {
+          "name": "CreatedAt_UTC",
+          "type": "timestamptz(6)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": 6,
+          "precision": null,
+          "scale": null,
+          "default": "CURRENT_TIMESTAMP",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "datetime"
+        },
+        "CreatedBy": {
+          "name": "CreatedBy",
+          "type": "bigint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "bigint"
+        },
+        "DeletedAt_UTC": {
+          "name": "DeletedAt_UTC",
+          "type": "timestamptz(6)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": 6,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "datetime"
+        },
+        "Description": {
+          "name": "Description",
+          "type": "text",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "text"
+        },
+        "DiscountAmount": {
+          "name": "DiscountAmount",
+          "type": "numeric(30,8)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": 30,
+          "scale": 8,
+          "default": "0",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "decimal"
+        },
+        "Fee": {
+          "name": "Fee",
+          "type": "numeric(30,8)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": 30,
+          "scale": 8,
+          "default": "0",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "decimal"
+        },
+        "Id": {
+          "name": "Id",
+          "type": "bigint",
+          "unsigned": false,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "bigint"
+        },
+        "Invoice": {
+          "name": "Invoice",
+          "type": "varchar(300)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": 300,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "string"
+        },
+        "ModifiedAt_UTC": {
+          "name": "ModifiedAt_UTC",
+          "type": "timestamptz(6)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": 6,
+          "precision": null,
+          "scale": null,
+          "default": "CURRENT_TIMESTAMP",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "datetime"
+        },
+        "ModifiedBy": {
+          "name": "ModifiedBy",
+          "type": "bigint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "bigint"
+        },
+        "PaymentMethod": {
+          "name": "PaymentMethod",
+          "type": "smallint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "1",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "smallint"
+        },
+        "RecordKey": {
+          "name": "RecordKey",
+          "type": "varchar(36)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": 36,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "string"
+        },
+        "ToAccountId": {
+          "name": "ToAccountId",
+          "type": "bigint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "bigint"
+        },
+        "TotalAmount": {
+          "name": "TotalAmount",
+          "type": "numeric(30,8)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": 30,
+          "scale": 8,
+          "default": "0",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "decimal"
+        },
+        "Type": {
+          "name": "Type",
+          "type": "smallint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "1",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "smallint"
+        },
+        "UserId": {
+          "name": "UserId",
+          "type": "bigint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "bigint"
+        }
+      },
+      "indexes": [
+        {
+          "columnNames": [
+            "AccountId"
+          ],
+          "composite": false,
+          "constraint": false,
+          "keyName": "Transactions_AccountId_index",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "CategoryId"
+          ],
+          "composite": false,
+          "constraint": false,
+          "keyName": "Transactions_CategoryId_index",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "ToAccountId"
+          ],
+          "composite": false,
+          "constraint": false,
+          "keyName": "Transactions_ToAccountId_index",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "UserId"
+          ],
+          "composite": false,
+          "constraint": false,
+          "keyName": "Transactions_UserId_index",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "Id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "keyName": "Transactions_pkey",
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [
+        {
+          "name": "Transactions_check",
+          "expression": "(\"Type\" IN (1, 2) AND \"ToAccountId\" IS NULL) OR (\"Type\" = 3 AND \"ToAccountId\" IS NOT NULL AND \"AccountId\" != \"ToAccountId\")",
+          "definition": "check ((\"Type\" IN (1, 2) AND \"ToAccountId\" IS NULL) OR (\"Type\" = 3 AND \"ToAccountId\" IS NOT NULL AND \"AccountId\" != \"ToAccountId\"))"
+        }
+      ],
+      "triggers": [],
+      "foreignKeys": {
+        "Transactions_AccountId_foreign": {
+          "columnNames": [
+            "AccountId"
+          ],
+          "constraintName": "Transactions_AccountId_foreign",
+          "localTableName": "public.Transactions",
+          "referencedColumnNames": [
+            "Id"
+          ],
+          "referencedTableName": "public.FinancialAccounts"
+        },
+        "Transactions_CategoryId_foreign": {
+          "columnNames": [
+            "CategoryId"
+          ],
+          "constraintName": "Transactions_CategoryId_foreign",
+          "localTableName": "public.Transactions",
+          "referencedColumnNames": [
+            "Id"
+          ],
+          "referencedTableName": "public.Categories",
+          "deleteRule": "set null"
+        },
+        "Transactions_ToAccountId_foreign": {
+          "columnNames": [
+            "ToAccountId"
+          ],
+          "constraintName": "Transactions_ToAccountId_foreign",
+          "localTableName": "public.Transactions",
+          "referencedColumnNames": [
+            "Id"
+          ],
+          "referencedTableName": "public.FinancialAccounts",
+          "deleteRule": "set null"
+        },
+        "Transactions_UserId_foreign": {
+          "columnNames": [
+            "UserId"
+          ],
+          "constraintName": "Transactions_UserId_foreign",
+          "localTableName": "public.Transactions",
           "referencedColumnNames": [
             "Id"
           ],
