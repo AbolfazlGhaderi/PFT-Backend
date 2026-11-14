@@ -21,20 +21,24 @@
     "types": ["vitest/globals", "node"],
     "paths": {
       "@/*": ["./src/*"],
-      "@app/*": [ "./src/app/*" ],
 
+      "@app/*": [ "./src/app/*" ],
       "@plugins": [ "./src/app/plugins/index.ts" ],
       "@plugins/*": [ "./src/app/plugins/*" ],
-
+      "@utils": ["./src/app/utils/index.ts"],
+      "@helpers": ["./src/app/helpers/index.ts"],
+      "@interceptors": ["./src/app/interceptors/index.ts"],
+      "@middlewares": ["./src/app/middlewares/index.ts"],
       "@common/*": [ "./src/common/*" ],
       "@enums": [ "./src/common/enums/index.ts" ],
       "@constants": [ "./src/common/constants/index.ts" ],
+      "@DTOs": [ "./src/common/dtos/index.ts" ],
 
       "@configs": [ "./src/configs/index.ts" ],
       "@configs/*": [ "./src/configs/*" ],
 
 
-      "@types": ["./src/common/types.ts"],
+      "@types": ["./src/common/types/index.ts"],
     }
   }
 }

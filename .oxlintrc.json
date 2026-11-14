@@ -9,6 +9,7 @@
     "no-duplicate-imports": "error",
 
     // TypeScript
+    "typescript/no-unused-vars": "warn",
     "typescript/no-explicit-any": "warn",
     "typescript/no-non-null-assertion": "error",
     "typescript/no-wrapper-object-types": "error",

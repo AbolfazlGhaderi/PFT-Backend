@@ -231,3 +231,10 @@ Do not create constants for every literal value. Values that are part of normal 
 - Keep changes focused and avoid unrelated modifications.
 - Ensure code passes TypeScript checks and lint rules before committing.
 - Keep the code readable and maintainable rather than optimizing prematurely.
+
+----
+
+
+
+## Notes
+> **Note:** The encryption key must contain at least 16 characters.
