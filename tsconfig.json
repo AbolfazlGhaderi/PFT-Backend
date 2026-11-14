@@ -29,11 +29,14 @@
       "@helpers": ["./src/app/helpers/index.ts"],
       "@interceptors": ["./src/app/interceptors/index.ts"],
       "@middlewares": ["./src/app/middlewares/index.ts"],
+      "@exceptionsFilters": ["./src/app/exception-filters/index.ts"],
+      "@pipes": ["./src/app/pipes/index.ts"],
+
       "@common/*": [ "./src/common/*" ],
       "@enums": [ "./src/common/enums/index.ts" ],
       "@constants": [ "./src/common/constants/index.ts" ],
       "@DTOs": [ "./src/common/dtos/index.ts" ],
-
+      "@decorators": [ "./src/common/decorators/index.ts" ],
       "@configs": [ "./src/configs/index.ts" ],
       "@configs/*": [ "./src/configs/*" ],
 

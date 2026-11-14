@@ -5,7 +5,11 @@ import { LoggerService } from 'logger-nestjs';
 import { DEFAULT_LOGGER_CONFIG } from '@configs';
 import { EnvKeys } from '@enums';
 import { ClsService } from 'nestjs-cls';
+import cookieParser from 'cookie-parser'
 import { ResponseInterceptor } from '@interceptors';
+import { HttpExceptionFilter } from '@exceptionsFilters';
+import { TrimStringPipe } from '@pipes';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const logger = new LoggerService(DEFAULT_LOGGER_CONFIG).setContext('BOOTSTRAP');
@@ -22,8 +26,15 @@ async function bootstrap() {
 
   const clsService = app.get(ClsService);
   const loggerService = app.get(LoggerService);
+
   // initialize app
   app.useGlobalInterceptors(new ResponseInterceptor(clsService, loggerService));
+  app.useGlobalFilters(new HttpExceptionFilter())
+  app.useGlobalInterceptors(new ResponseInterceptor(clsService, loggerService))
+  app.setGlobalPrefix('api')
+  app.use(cookieParser(EnvLoaderService.getOrFail('COOKIE_SECRET')))
+  app.useGlobalPipes(new TrimStringPipe())
+  app.useGlobalPipes(new ValidationPipe({ transform: true }))
 
   // App Listen
   const PORT = EnvLoaderService.get(EnvKeys.APP_PORT, 3000);
