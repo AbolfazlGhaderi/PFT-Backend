@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as dotenv from 'dotenv';
 
-import { ENVType } from '@types';
+import { ENVKeyT } from '@types';
 import { validateEnvs } from './validate.js';
 import { LoggerService } from 'logger-nestjs';
 import { DEFAULT_LOGGER_CONFIG } from '@configs';
@@ -89,7 +89,7 @@ export class EnvLoaderService {
     }
   }
 
-  static get<T = string>(key: keyof ENVType, defaultValue?: T): T {
+  static get<T = string>(key: keyof ENVKeyT, defaultValue?: T): T {
     return (this.variables[key] ?? defaultValue ?? '') as T;
   }
 
@@ -97,7 +97,7 @@ export class EnvLoaderService {
     return this.variables;
   }
 
-  static getOrFail<T = string>(key: keyof ENVType): T {
+  static getOrFail<T = string>(key: keyof ENVKeyT): T {
     if (Reflect.has(this.variables, key)) {
       return this.variables[key] as T;
     }
