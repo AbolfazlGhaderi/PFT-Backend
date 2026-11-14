@@ -3,10 +3,10 @@ import * as path from 'path';
 import * as dotenv from 'dotenv';
 
 import { ENVType } from '@types';
+import { validateEnvs } from './validate.js';
 import { LoggerService } from 'logger-nestjs';
 import { DEFAULT_LOGGER_CONFIG } from '@configs';
-import { EnvKeys } from '@/common/enums/env-keys.enum.js';
-import { validateEnvs } from './validate.js';
+import { EnvKeys } from '@enums';
 
 export class EnvLoaderService {
   private static variables: Record<string, unknown> = {};
@@ -89,9 +89,8 @@ export class EnvLoaderService {
     }
   }
 
-  static get<T = string>(key: keyof ENVType, defaultValue?: any): T {
-    // oxlint-disable-next-line typescript/no-unsafe-return
-    return (this.variables[key] as T) ?? defaultValue ?? ('' as T);
+  static get<T = string>(key: keyof ENVType, defaultValue?: T): T {
+    return (this.variables[key] ?? defaultValue ?? '') as T;
   }
 
   static getAll(): Record<string, unknown> {

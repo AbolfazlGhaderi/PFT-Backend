@@ -20,6 +20,8 @@ export function validateEnvs(variables: Record<string, unknown>) {
     SCALAR_PATH: Joi.string().required(),
     ENCRYPTION_KEY: Joi.string().required(),
     ENCRYPTION_VERSION: Joi.string().required(),
+    ENCRYPTION_KEY_MIN_LENGTH: Joi.number().required(),
+    ENCRYPTION_PREFIX: Joi.string().required(),
     GOOGLE_OAUTH2_CLIENT_ID: Joi.string().required(),
     GOOGLE_OAUTH2_CLIENT_SECRET: Joi.string().required(),
     GOOGLE_OAUTH2_CALLBACK_URL: Joi.string().required(),

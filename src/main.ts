@@ -4,6 +4,8 @@ import { EnvLoaderService } from '@plugins';
 import { LoggerService } from 'logger-nestjs';
 import { DEFAULT_LOGGER_CONFIG } from '@configs';
 import { EnvKeys } from '@enums';
+import { ClsService } from 'nestjs-cls';
+import { ResponseInterceptor } from '@interceptors';
 
 async function bootstrap() {
   const logger = new LoggerService(DEFAULT_LOGGER_CONFIG).setContext('BOOTSTRAP');
@@ -18,9 +20,14 @@ async function bootstrap() {
     // allowedHeaders: 'Content-Type, Authorization, X-Device-Id',
   });
 
+  const clsService = app.get(ClsService);
+  const loggerService = app.get(LoggerService);
+  // initialize app
+  app.useGlobalInterceptors(new ResponseInterceptor(clsService, loggerService));
+
   // App Listen
-  const PORT = EnvLoaderService.get(EnvKeys.APP_PORT) ?? 3000;
-  const HOST = EnvLoaderService.get(EnvKeys.APP_HOST) ?? 'localhost';
+  const PORT = EnvLoaderService.get(EnvKeys.APP_PORT, 3000);
+  const HOST = EnvLoaderService.get(EnvKeys.APP_HOST, '0.0.0.0');
   await app.listen(PORT, HOST, () => {
     // logs
     logger.verbose(`App :  http://${HOST}:${PORT}`);

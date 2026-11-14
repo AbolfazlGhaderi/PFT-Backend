@@ -14,7 +14,7 @@ export const FILTER_DELETED_TITLE = 'notDeleted';
 export const CLS_LOG_CYCLE = 'CLS_LOG_CYCLE';
 export const CLS_KEYS = {
   PAGINATION_PARAMS: 'PAGINATION_PARAMS',
-  REQUEST_ID: 'x-request-id',
+  REQUEST_ID: 'requestId',
   CURRENT_USER: 'CurrentUser',
   COMPANY_ACCOUNT: 'companyAccount',
 } as const;
