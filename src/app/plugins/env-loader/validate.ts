@@ -2,7 +2,6 @@ import Joi from 'joi';
 
 export function validateEnvs(variables: Record<string, unknown>) {
   const schema = Joi.object({
-    CONFIG_DIR: Joi.string().required(),
     CORS_ORIGINS: Joi.array().items(Joi.string()).required(),
     CORS_METHODS: Joi.string().required(),
     NODE_ENV: Joi.string().required(),
@@ -13,6 +12,7 @@ export function validateEnvs(variables: Record<string, unknown>) {
     DB_HOST: Joi.string().required(),
     DB_USERNAME: Joi.string().required(),
     DB_PASSWORD: Joi.string().required(),
+    DB_LOGGING: Joi.boolean().required(),
     SWAGGER_TITLE: Joi.string().required(),
     SWAGGER_DESCRIPTION: Joi.string().required(),
     SWAGGER_VERSION: Joi.string().required(),

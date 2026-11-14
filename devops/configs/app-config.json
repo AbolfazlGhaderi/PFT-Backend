@@ -10,6 +10,7 @@
     "DB_PORT": 5432,
     "DB_HOST": "127.0.0.1",
     "DB_USERNAME": "postgres",
+    "DB_LOGGING": true,
 
     "SWAGGER_TITLE": "RZ VPN API",
     "SWAGGER_DESCRIPTION": "APIs related to the backend part of the website.",

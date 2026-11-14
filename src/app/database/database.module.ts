@@ -19,16 +19,16 @@ const repositories = loadRepositories();
     MikroOrmModule.forRootAsync({
       inject: [ClsService],
       useFactory: async (cls: ClsService) => ({
-        debug: false,
+        debug: EnvLoaderService.getOrFail<boolean>(EnvKeys.DB_LOGGING),
         driver: PostgreSqlDriver,
         dbName: EnvLoaderService.getOrFail(EnvKeys.DB_NAME),
         host: EnvLoaderService.getOrFail(EnvKeys.DB_HOST),
         port: Number(EnvLoaderService.getOrFail(EnvKeys.DB_PORT)),
         password: EnvLoaderService.getOrFail(EnvKeys.DB_PASSWORD),
         user: EnvLoaderService.getOrFail(EnvKeys.DB_USERNAME),
+        forceUtcTimezone: true,
         entities: ['./dist/app/database/entities/**.entity.js'],
         entitiesTs: ['./src/app/database/entities/**.entity.ts'],
-        forceUtcTimezone: true,
         pool: {
           min: 2,
           max: 10,
@@ -57,7 +57,7 @@ function loadEntities(): Provider[] {
     if (!file.endsWith('.entity.js') || file.startsWith('base.')) return;
 
     // eslint-disable-next-line @typescript-eslint/no-require-imports
-     const imported = await import(join(entityPath, file))
+    const imported = await import(join(entityPath, file));
 
     Object.values(imported).forEach(exported => {
       if (typeof exported === 'function') {

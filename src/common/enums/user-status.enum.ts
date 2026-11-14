@@ -1,5 +1,5 @@
 export enum UserStatusENUM {
-    ACTIVE = 1,
-    SUSPENDED,
-    BLOCKED,
+  ACTIVE = 1,
+  SUSPENDED,
+  BLOCKED,
 }

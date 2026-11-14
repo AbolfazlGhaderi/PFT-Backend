@@ -14,7 +14,7 @@ export class EnvLoaderService {
 
   static load() {
     // 1. Load *.config.json files
-    const jsonDirPath = path.resolve(process.cwd(), process.env.CONFIG_DIR || 'devops');
+    const jsonDirPath = path.resolve(process.cwd(), 'devops/configs');
 
     if (fs.existsSync(jsonDirPath)) {
       try {
@@ -75,7 +75,6 @@ export class EnvLoaderService {
 
     // 6. Custom validation (Joi / Zod / Custom)
     validateEnvs(this.variables);
-
     return this.variables;
   }
 
