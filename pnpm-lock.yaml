@@ -14,6 +14,9 @@ importers:
       '@mikro-orm/core':
         specifier: ^7.2.8
         version: 7.2.8
+      '@mikro-orm/decorators':
+        specifier: ^7.2.9
+        version: 7.2.9(@mikro-orm/core@7.2.8)(reflect-metadata@0.2.2)
       '@mikro-orm/migrations':
         specifier: ^7.2.8
         version: 7.2.8(@mikro-orm/core@7.2.8)
@@ -44,6 +47,9 @@ importers:
       '@scalar/nestjs-api-reference':
         specifier: ^1.2.37
         version: 1.2.37
+      bcrypt:
+        specifier: ^6.0.0
+        version: 6.0.0
       class-transformer:
         specifier: ^0.5.1
         version: 0.5.1
@@ -87,6 +93,9 @@ importers:
       '@nestjs/testing':
         specifier: ^12.0.1
         version: 12.4.0(@nestjs/common@12.4.0(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(supports-color@7.2.0))(@nestjs/core@12.4.0)(@nestjs/platform-express@12.4.0)
+      '@types/bcrypt':
+        specifier: ^6.0.0
+        version: 6.0.0
       '@types/cookie-parser':
         specifier: ^1.4.10
         version: 1.4.10(@types/express@5.0.6)
@@ -370,6 +379,16 @@ packages:
       dataloader: 2.2.3
     peerDependenciesMeta:
       dataloader:
+        optional: true
+
+  '@mikro-orm/decorators@7.2.9':
+    resolution: {integrity: sha512-neJ9rQztszx4b8Kb1A23BinHBApgrOA5o/aVtkTzvlb4A3VrfkLjITmo0qfQmTVjy7va3q7H2Ps7tLG0jWuOdw==}
+    engines: {node: '>= 22.17.0'}
+    peerDependencies:
+      '@mikro-orm/core': 7.2.9
+      reflect-metadata: ^0.1.0 || ^0.2.0
+    peerDependenciesMeta:
+      reflect-metadata:
         optional: true
 
   '@mikro-orm/migrations@7.2.8':
@@ -882,6 +901,9 @@ packages:
   '@tokenizer/token@0.3.0':
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
 
+  '@types/bcrypt@6.0.0':
+    resolution: {integrity: sha512-/oJGukuH3D2+D+3H4JWLaAsJ/ji86dhRidzZ/Od7H/i8g+aCmvkeCc6Ni/f9uxGLSQVCRZkX2/lqEFG2BvWtlQ==}
+
   '@types/body-parser@1.19.6':
     resolution: {integrity: sha512-HLFeCYgz89uk22N5Qg3dvGvsv46B8GLvKKo1zKG4NybA8U2DiEO3w9lqGg29t/tfLRJpJ6iQxnVw4OnB7MoM9g==}
 
@@ -1046,6 +1068,10 @@ packages:
 
   base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
+
+  bcrypt@6.0.0:
+    resolution: {integrity: sha512-cU8v/EGSrnH+HnxV2z0J7/blxH8gq7Xh2JFT6Aroax7UohdmiJJlxApMxtKfuI7z68NvvVcmR78k2LbT6efhRg==}
+    engines: {node: '>= 18'}
 
   bl@4.1.0:
     resolution: {integrity: sha512-1W07cM9gS6DcLperZfFSj+bWLtaPGSOHWhPiGzXmvVJbRLdG82sH/Kn8EtW1VqWVA54AKf2h5k5BbnIbwF3h6w==}
@@ -1735,6 +1761,10 @@ packages:
       reflect-metadata: '*'
       rxjs: '>= 7'
 
+  node-addon-api@8.9.2:
+    resolution: {integrity: sha512-VijLXbi3UACN69I0JVXJsX4tjACjNoQDgv2gTF6sx2wWEi8tkSg2eX8p5gSIFi8z2+DL3oHmY6OyKce38SDolg==}
+    engines: {node: ^18 || ^20 || >= 21}
+
   node-emoji@2.1.3:
     resolution: {integrity: sha512-E2WEOVsgs7O16zsURJ/eH8BqhF029wGpEOnv7Urwdo2wmQanOACwJQh0devF9D9RhoZru0+9JXIS0dBXIAz+lA==}
     engines: {node: '>=18'}
@@ -1742,6 +1772,10 @@ packages:
   node-emoji@2.2.0:
     resolution: {integrity: sha512-Z3lTE9pLaJF47NyMhd4ww1yFTAP8YhYI8SleJiHzM46Fgpm5cnNzSl9XfzFNqbaz+VlJrIj3fXQ4DeN1Rjm6cw==}
     engines: {node: '>=18'}
+
+  node-gyp-build@4.8.4:
+    resolution: {integrity: sha512-LA4ZjwlnUblHVgq0oBF3Jl/6h/Nvs5fzBLwdEF4nuxnFdsfajde4WfxtJr3CaiH+F6ewcIB/q4jQ4UzPyid+CQ==}
+    hasBin: true
 
   object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
@@ -2535,6 +2569,12 @@ snapshots:
 
   '@mikro-orm/core@7.2.8': {}
 
+  '@mikro-orm/decorators@7.2.9(@mikro-orm/core@7.2.8)(reflect-metadata@0.2.2)':
+    dependencies:
+      '@mikro-orm/core': 7.2.8
+    optionalDependencies:
+      reflect-metadata: 0.2.2
+
   '@mikro-orm/migrations@7.2.8(@mikro-orm/core@7.2.8)':
     dependencies:
       '@mikro-orm/core': 7.2.8
@@ -2872,6 +2912,10 @@ snapshots:
 
   '@tokenizer/token@0.3.0': {}
 
+  '@types/bcrypt@6.0.0':
+    dependencies:
+      '@types/node': 24.19.2
+
   '@types/body-parser@1.19.6':
     dependencies:
       '@types/connect': 3.4.38
@@ -3052,6 +3096,11 @@ snapshots:
   balanced-match@4.0.4: {}
 
   base64-js@1.5.1: {}
+
+  bcrypt@6.0.0:
+    dependencies:
+      node-addon-api: 8.9.2
+      node-gyp-build: 4.8.4
 
   bl@4.1.0:
     dependencies:
@@ -3680,6 +3729,8 @@ snapshots:
       reflect-metadata: 0.2.2
       rxjs: 7.8.2
 
+  node-addon-api@8.9.2: {}
+
   node-emoji@2.1.3:
     dependencies:
       '@sindresorhus/is': 4.6.0
@@ -3693,6 +3744,8 @@ snapshots:
       char-regex: 1.0.2
       emojilib: 2.4.0
       skin-tone: 2.0.0
+
+  node-gyp-build@4.8.4: {}
 
   object-assign@4.1.1: {}
 

@@ -31,7 +31,14 @@
       "@middlewares": ["./src/app/middlewares/index.ts"],
       "@exceptionsFilters": ["./src/app/exception-filters/index.ts"],
       "@pipes": ["./src/app/pipes/index.ts"],
-
+      
+      "@database": ["./src/app/database/index.ts"],
+      "@database/*": ["./src/app/database/*"],
+      "@db-entities": ["./src/app/database/entities/index.ts"],
+      "@db-entities/*": ["./src/app/database/entities/*"],
+      "@db-repositories": ["./src/app/database/repositories/index.ts"],
+      "@db-repositories/*": ["./src/app/database/repositories/*"],
+      
       "@common/*": [ "./src/common/*" ],
       "@enums": [ "./src/common/enums/index.ts" ],
       "@constants": [ "./src/common/constants/index.ts" ],

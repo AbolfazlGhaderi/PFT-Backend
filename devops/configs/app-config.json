@@ -5,10 +5,12 @@
     "NODE_ENV": "development",
     "APP_PORT": 4000,
     "APP_HOST": "0.0.0.0",
-    "DB_NAME": "RzVpn_dev",
-    "DB_PORT": 3306,
-    "DB_HOST": "mysql-develop",
-    "DB_USERNAME": "root",
+
+    "DB_NAME": "PFT",
+    "DB_PORT": 5432,
+    "DB_HOST": "127.0.0.1",
+    "DB_USERNAME": "postgres",
+
     "SWAGGER_TITLE": "RZ VPN API",
     "SWAGGER_DESCRIPTION": "APIs related to the backend part of the website.",
     "SWAGGER_VERSION": "v0.0.1",

@@ -7,9 +7,16 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { RequestLoggerMiddleware } from '@middlewares';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { DEFAULT_LOGGER_CONFIG, CLS_MODULE_CONFIG, THROTTLER_CONFIG } from '@configs';
+import { DatabaseModule } from '@database';
 
 @Module({
-  imports: [ThrottlerModule.forRoot(THROTTLER_CONFIG), DiscoveryModule, ClsModule.forRoot(CLS_MODULE_CONFIG), LoggerModule.register(DEFAULT_LOGGER_CONFIG)],
+  imports: [
+    ThrottlerModule.forRoot(THROTTLER_CONFIG),
+    DiscoveryModule,
+    ClsModule.forRoot(CLS_MODULE_CONFIG),
+    LoggerModule.register(DEFAULT_LOGGER_CONFIG),
+    DatabaseModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
