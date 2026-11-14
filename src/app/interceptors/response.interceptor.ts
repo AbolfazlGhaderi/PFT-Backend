@@ -9,6 +9,11 @@ import { LoggerService } from 'logger-nestjs';
 import { ApiResponseT, DefaultSuccessResponseT, PaginationT } from '@types';
 import { CallHandler, ExecutionContext, HttpException, HttpStatus, Injectable, NestInterceptor } from '@nestjs/common';
 
+// Postgres bigint columns arrive as BigInt, which JSON.stringify cannot serialize
+function bigIntReplacer(_key: string, value: unknown): unknown {
+  return typeof value === 'bigint' ? Number(value) : value;
+}
+
 @Injectable()
 export class ResponseInterceptor implements NestInterceptor {
   private readonly logger: LoggerService;
@@ -106,6 +111,9 @@ export class ResponseInterceptor implements NestInterceptor {
       responseObject['data'] = result;
     }
 
+    // // single plain-JSON pass: entities/refs become plain objects, BigInts become numbers
+    // responseObject['data'] = JSON.parse(JSON.stringify(responseObject['data'], bigIntReplacer));
+
     const dif = process.hrtime(startAt);
     const responseTime = dif[0] * 1e3 + dif[1] * 1e-6;
     this.logger.log(`RequestId: ${requestId}  | path: ${context.switchToHttp().getRequest<Request>().path} | Response Time: ${responseTime.toFixed(2)}ms`);
@@ -116,7 +124,7 @@ export class ResponseInterceptor implements NestInterceptor {
     const startAt = process.hrtime();
     return next.handle().pipe(
       mergeMap(result => {
-        this.logger.verbose(`Response before processing: ${JSON.stringify(result)}`);
+        this.logger.verbose(`Response before processing: ${JSON.stringify(result, bigIntReplacer)}`);
         return from(this.processResponse(result as ApiResponseT, context, startAt));
       }),
     );

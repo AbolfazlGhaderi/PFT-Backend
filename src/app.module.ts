@@ -9,6 +9,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { DEFAULT_LOGGER_CONFIG, CLS_MODULE_CONFIG, THROTTLER_CONFIG } from '@configs';
 import { DatabaseModule } from '@database';
 import { InitializerService } from './app/plugins/initial/initializer.service.js';
+import { FinancialAccountModule } from './modules/financial-account/financial-account.module.js';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { InitializerService } from './app/plugins/initial/initializer.service.js
     ClsModule.forRoot(CLS_MODULE_CONFIG),
     LoggerModule.register(DEFAULT_LOGGER_CONFIG),
     DatabaseModule,
+    FinancialAccountModule,
   ],
   controllers: [AppController],
   providers: [AppService, InitializerService],

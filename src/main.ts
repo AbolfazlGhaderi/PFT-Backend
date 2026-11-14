@@ -33,7 +33,6 @@ async function bootstrap() {
   // initialize app
   app.useGlobalInterceptors(new ResponseInterceptor(clsService, loggerService));
   app.useGlobalFilters(new HttpExceptionFilter());
-  app.useGlobalInterceptors(new ResponseInterceptor(clsService, loggerService));
   app.setGlobalPrefix('api');
   app.use(cookieParser(EnvLoaderService.getOrFail('COOKIE_SECRET')));
   app.useGlobalPipes(new TrimStringPipe());

@@ -155,4 +155,20 @@ export const API_ERROR_CODES = {
     HttpStatusCode: 409,
     errorCode: 2029,
   },
+
+  FINANCIAL_ACCOUNT_NOT_FOUND: {
+    message: 'Financial account not found',
+    HttpStatusCode: 404,
+    errorCode: 2030,
+  },
+  FINANCIAL_ACCOUNT_TITLE_ALREADY_EXISTS: {
+    message: 'Financial account title already exists for this user',
+    HttpStatusCode: 409,
+    errorCode: 2031,
+  },
+  CURRENCY_NOT_FOUND: {
+    message: 'Currency not found',
+    HttpStatusCode: 404,
+    errorCode: 2032,
+  },
 };

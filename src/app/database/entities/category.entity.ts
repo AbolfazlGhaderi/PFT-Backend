@@ -1,9 +1,10 @@
 import { TABLE_NAMES } from '@constants';
-import { ApplyDeletedFilter, PrimaryColumn } from '@decorators';
 import { Collection, EntityRepositoryType, type Rel } from '@mikro-orm/postgresql';
 import { Entity, ManyToOne, OneToMany, Property, Unique } from '@mikro-orm/decorators/legacy';
 import { CategoryRepository } from '@database/repositories/category.repository.js';
 import { TransactionEntity } from './transaction.entity.js';
+import { IdT } from '@database/common/types/id.type.js';
+import { ApplyDeletedFilter, PrimaryColumn } from '@database/common/decorators/database.decorators.js';
 
 @Entity({ tableName: TABLE_NAMES.CATEGORY, repository: () => CategoryRepository })
 @ApplyDeletedFilter()
@@ -23,7 +24,7 @@ export class CategoryEntity {
   @Property({ fieldName: 'Type', type: 'smallint', nullable: false })
   type!: number;
 
-  @ManyToOne(() => CategoryEntity, { nullable: true, fieldName: 'ParentId', index: true, type: 'bigint' })
+  @ManyToOne(() => CategoryEntity, { nullable: true, fieldName: 'ParentId', index: true, type: IdT })
   parent?: Rel<CategoryEntity>;
 
   @Property({ fieldName: 'Description', type: 'text', nullable: true })
@@ -32,7 +33,7 @@ export class CategoryEntity {
   @Property({ onCreate: () => new Date(), type: 'timestamptz', name: 'CreatedAt_UTC', defaultRaw: 'CURRENT_TIMESTAMP', nullable: true })
   createdAt?: Date;
 
-  @Property({ name: 'CreatedBy', type: 'bigint', unsigned: true, nullable: true })
+  @Property({ name: 'CreatedBy', type: IdT, nullable: true, unsigned: true })
   createdBy?: number;
 
   @Property({
@@ -45,7 +46,7 @@ export class CategoryEntity {
   })
   modifiedAt?: Date;
 
-  @Property({ name: 'ModifiedBy', type: 'bigint', unsigned: true, nullable: true })
+  @Property({ name: 'ModifiedBy', type: IdT, nullable: true, unsigned: true })
   modifiedBy?: number;
 
   @Property({ fieldName: 'DeletedAt_UTC', type: 'timestamptz', nullable: true })

@@ -3,11 +3,12 @@ import { TABLE_NAMES } from '@constants';
 import { UserEntity } from './user.entity.js';
 import { CategoryEntity } from './category.entity.js';
 import { PaymentMethodENUM, TransactionTypeENUM } from '@enums';
-import { ApplyDeletedFilter, PrimaryColumn } from '@decorators';
+import { ApplyDeletedFilter, PrimaryColumn } from '@database/common/decorators/database.decorators.js';
 import { FinancialAccountEntity } from './financial-account.entity.js';
 import { EntityRepositoryType, type Rel } from '@mikro-orm/postgresql';
 import { Check, Entity, ManyToOne, Property } from '@mikro-orm/decorators/legacy';
 import { TransactionRepository } from '@database/repositories/transaction.repository.js';
+import { IdT } from '@database/common/types/id.type.js';
 
 @Entity({ tableName: TABLE_NAMES.TRANSACTION, repository: () => TransactionRepository })
 @ApplyDeletedFilter()
@@ -18,19 +19,19 @@ export class TransactionEntity {
   @PrimaryColumn()
   id!: number;
 
-  @ManyToOne(() => UserEntity, { nullable: false, fieldName: 'UserId', index: true, type: 'bigint' })
+  @ManyToOne(() => UserEntity, { nullable: false, fieldName: 'UserId', index: true, type: IdT })
   user!: Rel<UserEntity>;
 
   @Property({ fieldName: 'Type', type: 'tinyint', default: TransactionTypeENUM.EXPENSE })
   type!: number;
 
-  @ManyToOne(() => FinancialAccountEntity, { nullable: false, fieldName: 'AccountId', index: true, type: 'bigint' })
+  @ManyToOne(() => FinancialAccountEntity, { nullable: false, fieldName: 'AccountId', index: true, type: IdT })
   account!: Rel<FinancialAccountEntity>;
 
-  @ManyToOne(() => FinancialAccountEntity, { nullable: true, fieldName: 'ToAccountId', index: true, type: 'bigint' })
+  @ManyToOne(() => FinancialAccountEntity, { nullable: true, fieldName: 'ToAccountId', index: true, type: IdT })
   toAccount?: Rel<FinancialAccountEntity>;
 
-  @ManyToOne(() => CategoryEntity, { nullable: true, fieldName: 'CategoryId', index: true, type: 'bigint' })
+  @ManyToOne(() => CategoryEntity, { nullable: true, fieldName: 'CategoryId', index: true, type: IdT })
   category?: Rel<CategoryEntity>;
 
   @Property({ fieldName: 'Amount', type: 'decimal', precision: 30, scale: 8, default: 0 })
@@ -60,7 +61,7 @@ export class TransactionEntity {
   @Property({ onCreate: () => new Date(), type: 'timestamptz', name: 'CreatedAt_UTC', defaultRaw: 'CURRENT_TIMESTAMP', nullable: true })
   createdAt?: Date;
 
-  @Property({ name: 'CreatedBy', type: 'bigint', unsigned: true, nullable: true })
+  @Property({ name: 'CreatedBy', type: IdT, nullable: true, unsigned: true })
   createdBy?: number;
 
   @Property({
@@ -73,7 +74,7 @@ export class TransactionEntity {
   })
   modifiedAt?: Date;
 
-  @Property({ name: 'ModifiedBy', type: 'bigint', unsigned: true, nullable: true })
+  @Property({ name: 'ModifiedBy', type: IdT, nullable: true, unsigned: true })
   modifiedBy?: number;
 
   @Property({ fieldName: 'DeletedAt_UTC', type: 'timestamptz', nullable: true })

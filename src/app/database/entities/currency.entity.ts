@@ -1,9 +1,10 @@
 import { TABLE_NAMES } from '@constants';
-import { ApplyDeletedFilter, PrimaryColumn } from '@decorators';
+import { ApplyDeletedFilter, PrimaryColumn } from '@database/common/decorators/database.decorators.js';
 import { Collection, EntityRepositoryType } from '@mikro-orm/postgresql';
 import { Entity, OneToMany, Property, Unique } from '@mikro-orm/decorators/legacy';
 import { CurrencyRepository } from '@database/repositories/currency.repository.js';
 import { FinancialAccountEntity } from './financial-account.entity.js';
+import { IdT } from '@database/common/types/id.type.js';
 
 @Entity({ tableName: TABLE_NAMES.CURRENCY, repository: () => CurrencyRepository })
 @ApplyDeletedFilter()
@@ -32,7 +33,7 @@ export class CurrencyEntity {
   @Property({ onCreate: () => new Date(), type: 'timestamptz', name: 'CreatedAt_UTC', defaultRaw: 'CURRENT_TIMESTAMP', nullable: true })
   createdAt?: Date;
 
-  @Property({ name: 'CreatedBy', type: 'bigint', unsigned: true, nullable: true })
+  @Property({ name: 'CreatedBy', type: IdT, nullable: true, unsigned: true })
   createdBy?: number;
 
   @Property({
@@ -45,7 +46,7 @@ export class CurrencyEntity {
   })
   modifiedAt?: Date;
 
-  @Property({ name: 'ModifiedBy', type: 'bigint', unsigned: true, nullable: true })
+  @Property({ name: 'ModifiedBy', type: IdT, nullable: true, unsigned: true })
   modifiedBy?: number;
 
   @Property({ fieldName: 'DeletedAt_UTC', type: 'timestamptz', nullable: true })
