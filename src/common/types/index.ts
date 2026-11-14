@@ -1,12 +1,11 @@
 import { EnvKeys } from '@enums';
 import type { FilterQuery, OrderDefinition } from '@mikro-orm/postgresql';
 
-
 export type ExpressRouteLayer = {
-    route?: {
-        path: string
-    }
-}
+  route?: {
+    path: string;
+  };
+};
 
 // ------
 export type ENVKeyT = {

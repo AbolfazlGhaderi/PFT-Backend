@@ -12,7 +12,7 @@ import { HttpExceptionFilter } from '@exceptionsFilters';
 import { TrimStringPipe } from '@pipes';
 import { ValidationPipe } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { ExpressRouteLayer } from '@types'
+import { ExpressRouteLayer } from '@types';
 
 async function bootstrap() {
   const logger = new LoggerService(DEFAULT_LOGGER_CONFIG).setContext('BOOTSTRAP');
@@ -59,9 +59,7 @@ async function bootstrap() {
 
     const server = app.getHttpServer();
     const router = server._events.request.router;
-    const routes = (router.stack as ExpressRouteLayer[])
-    .filter(layer => layer.route?.path.startsWith('/api/'))
-    .map(layer => layer.route?.path)
+    const routes = (router.stack as ExpressRouteLayer[]).filter(layer => layer.route?.path.startsWith('/api/')).map(layer => layer.route?.path);
     response.json(routes);
   });
 
