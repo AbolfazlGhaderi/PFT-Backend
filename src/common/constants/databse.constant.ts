@@ -2,6 +2,8 @@ export const TABLE_NAMES = {
   USER: 'User',
   USER_SECURITY: 'UserSecurity',
   ACCOUNT: 'Accounts',
+  CURRENCY: 'Currencies',
+  FINANCIAL_ACCOUNT: 'FinancialAccounts',
   COMPANY: 'Companies',
   COMPANY_ACCOUNT: 'CompanyAccounts',
   COMPANY_CONFIG: 'CompanyConfigs',

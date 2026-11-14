@@ -1,21 +1,23 @@
-import * as bcrypt from 'bcrypt';
 import { randomUUID } from 'crypto';
-import { TABLE_NAMES } from '@constants';
 import { UserStatusENUM } from '@enums';
-import { UserRepository } from '@db-repositories';
-import { ApplyDeletedFilter } from '@decorators';
-import { EntityRepositoryType } from '@mikro-orm/postgresql';
-import { BeforeCreate, BeforeUpdate, Entity, PrimaryKey, Property } from '@mikro-orm/decorators/legacy';
+import { TABLE_NAMES } from '@constants';
+import { UserSecurityEntity } from './user-security.entity.js';
+import { ApplyDeletedFilter, PrimaryColumn } from '@decorators';
+import { FinancialAccountEntity } from './financial-account.entity.js';
+import { Collection, EntityRepositoryType, type Rel } from '@mikro-orm/postgresql';
+import { UserRepository } from '@database/repositories/user.repository.js';
+import { Entity, OneToMany, OneToOne, Property, Unique } from '@mikro-orm/decorators/legacy';
 
 @Entity({ tableName: TABLE_NAMES.USER, repository: () => UserRepository })
 @ApplyDeletedFilter()
+@Unique({ properties: ['phoneNumber', 'deletedAt'] })
 export class UserEntity {
   [EntityRepositoryType]?: UserRepository;
 
-  @PrimaryKey({ autoincrement: true, name: 'Id', type: 'bigint', unsigned: true })
+  @PrimaryColumn()
   id!: number;
 
-  @Property({ unique: true, fieldName: 'PhoneNumber', type: 'varchar', length: 12, nullable: true })
+  @Property({ fieldName: 'PhoneNumber', type: 'varchar', length: 12, nullable: true })
   phoneNumber?: string;
 
   @Property({ fieldName: 'PhoneVerifiedAt', type: 'datetime', nullable: true })
@@ -26,9 +28,6 @@ export class UserEntity {
 
   // @Property({ fieldName: 'EmailVerifiedAt', nullable: true })
   // emailVerifiedAt?: Date
-
-  @Property({ fieldName: 'PasswordHash', type: 'varchar', length: 255, nullable: true, hidden: true })
-  passwordHash?: string;
 
   @Property({ fieldName: 'Status', default: UserStatusENUM.ACTIVE, type: 'tinyint' })
   status!: number;
@@ -61,12 +60,9 @@ export class UserEntity {
   @Property({ fieldName: 'DeletedAt_UTC', type: 'timestamptz', nullable: true })
   deletedAt?: Date;
 
-  @BeforeCreate()
-  @BeforeUpdate()
-  async hashPassword() {
-    if (this.passwordHash) {
-      const salt = await bcrypt.genSalt(10);
-      this.passwordHash = await bcrypt.hash(this.passwordHash, salt);
-    }
-  }
+  @OneToMany(() => FinancialAccountEntity, account => account.user)
+  financialAccounts = new Collection<FinancialAccountEntity>(this);
+
+  @OneToOne(() => UserSecurityEntity, entity => entity.user, { hidden: true })
+  security?: Rel<UserSecurityEntity>;
 }

@@ -1,7 +1,7 @@
 import { LoggerConfig } from 'logger-nestjs';
 
 export * from './errors.constant.js';
-export * from './table-names.constant.js';
+export * from './databse.constant.js';
 // -------------------
 export const DEFAULT_DB_PORT = 3306;
 export const ENCRYPTION_PREFIX = 'enc';
