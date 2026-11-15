@@ -33,6 +33,7 @@
         }
     ],
   },
+  "ignorePatterns": ["Migration**.ts"],
   "env": {
     "node": true
   },
