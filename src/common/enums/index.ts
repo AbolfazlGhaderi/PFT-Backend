@@ -6,3 +6,6 @@ export * from './transaction-type.enum.js';
 export * from './financial-account-type.enum.js';
 export * from './payment-method.enum.js';
 export * from './category-type.enum.js';
+export * from './debt-status.enum.js';
+export * from './debt-type.enum.js';
+export * from './installment-interval.enum.js';

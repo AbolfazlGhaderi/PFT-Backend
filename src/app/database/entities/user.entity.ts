@@ -8,6 +8,7 @@ import { Collection, EntityRepositoryType, type Rel } from '@mikro-orm/postgresq
 import { UserRepository } from '@database/repositories/user.repository.js';
 import { Entity, OneToMany, OneToOne, Property, Unique } from '@mikro-orm/decorators/legacy';
 import { IdT } from '@database/common/types/id.type.js';
+import { DebtEntity } from './debt.entity.js';
 
 @Entity({ tableName: TABLE_NAMES.USER, repository: () => UserRepository })
 @ApplyDeletedFilter()
@@ -63,6 +64,9 @@ export class UserEntity {
 
   @OneToMany(() => FinancialAccountEntity, account => account.user)
   financialAccounts = new Collection<FinancialAccountEntity>(this);
+
+  @OneToMany(() => DebtEntity, debt => debt.user)
+  debts?: Rel<DebtEntity>;
 
   @OneToOne(() => UserSecurityEntity, entity => entity.user, { hidden: true })
   security?: Rel<UserSecurityEntity>;

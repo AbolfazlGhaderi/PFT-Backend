@@ -5,3 +5,5 @@ export * from './financial-account.repository.js';
 export * from './user-security.repository.js';
 export * from './category.repository.js';
 export * from './transaction.repository.js';
+export * from './debt.repository.js';
+export * from './debt-payment.repository.js';

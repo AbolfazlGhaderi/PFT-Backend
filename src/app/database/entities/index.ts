@@ -4,3 +4,5 @@ export * from './financial-account.entity.js';
 export * from './user-security.entity.js';
 export * from './category.entity.js';
 export * from './transaction.entity.js';
+export * from './debt.entity.js';
+export * from './debt-payment.entity.js';

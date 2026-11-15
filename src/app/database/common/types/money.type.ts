@@ -11,6 +11,6 @@ export class MoneyT extends Type<Decimal, string> {
   }
 
   override getColumnType(): string {
-    return 'decimal(30,8)';
+    return 'decimal(20,5)';
   }
 }

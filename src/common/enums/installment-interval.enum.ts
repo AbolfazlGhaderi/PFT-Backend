@@ -1,0 +1,12 @@
+// 1: ONE_TIME, 2: DAILY, 3: WEEKLY, 4: BIWEEKLY,
+// 5: MONTHLY, 6: QUARTERLY, 7: SEMIANNUALLY, 8: YEARLY
+export enum InstallmentIntervalENUM {
+  ONE_TIME = 1,
+  DAILY = 2,
+  WEEKLY = 3,
+  BIWEEKLY = 4,
+  MONTHLY = 5,
+  QUARTERLY = 6,
+  SEMIANNUALLY = 7,
+  YEARLY = 8,
+}
