@@ -1,6 +1,6 @@
 export enum FinancialAccountTypeENUM {
-  BANK = 0,
-  CASH = 1,
-  WALLET = 2,
-  INVESTMENT = 3,
+  BANK = 1,
+  CASH = 2,
+  WALLET = 3,
+  INVESTMENT = 4,
 }

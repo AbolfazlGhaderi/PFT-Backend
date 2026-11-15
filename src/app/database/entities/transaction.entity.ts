@@ -9,6 +9,8 @@ import { EntityRepositoryType, type Rel } from '@mikro-orm/postgresql';
 import { Check, Entity, ManyToOne, Property } from '@mikro-orm/decorators/legacy';
 import { TransactionRepository } from '@database/repositories/transaction.repository.js';
 import { IdT } from '@database/common/types/id.type.js';
+import { MoneyT } from '@database/common/types/money.type.js';
+import { Decimal } from 'decimal.js';
 
 @Entity({ tableName: TABLE_NAMES.TRANSACTION, repository: () => TransactionRepository })
 @ApplyDeletedFilter()
@@ -34,17 +36,17 @@ export class TransactionEntity {
   @ManyToOne(() => CategoryEntity, { nullable: true, fieldName: 'CategoryId', index: true, type: IdT })
   category?: Rel<CategoryEntity>;
 
-  @Property({ fieldName: 'Amount', type: 'decimal', precision: 30, scale: 8, default: 0 })
-  amount!: string;
+  @Property({ fieldName: 'Amount', type: MoneyT, default: 0 })
+  amount!: Decimal;
 
-  @Property({ fieldName: 'Fee', type: 'decimal', precision: 30, scale: 8, default: 0 })
-  fee!: string;
+  @Property({ fieldName: 'Fee', type: MoneyT, default: 0 })
+  fee!: Decimal;
 
-  @Property({ fieldName: 'DiscountAmount', type: 'decimal', precision: 30, scale: 8, default: 0 })
-  discountAmount!: string;
+  @Property({ fieldName: 'DiscountAmount', type: MoneyT, default: 0 })
+  discountAmount!: Decimal;
 
-  @Property({ fieldName: 'TotalAmount', type: 'decimal', precision: 30, scale: 8, default: 0 })
-  totalAmount!: string;
+  @Property({ fieldName: 'TotalAmount', type: MoneyT, default: 0 })
+  totalAmount!: Decimal;
 
   @Property({ fieldName: 'PaymentMethod', type: 'smallint', default: PaymentMethodENUM.CARD })
   paymentMethod!: number;

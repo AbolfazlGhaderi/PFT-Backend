@@ -61,7 +61,7 @@ Fields that you can use:
             userId: 1,
             currencyId: 1,
             title: 'My Bank Account',
-            type: 0,
+            type: 1,
             initialBalance: '1000.50',
             description: 'Account description',
             isActive: 1,

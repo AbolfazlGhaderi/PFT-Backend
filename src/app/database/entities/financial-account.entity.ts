@@ -1,14 +1,16 @@
+import { Decimal } from 'decimal.js';
 import { randomUUID } from 'crypto';
 import { TABLE_NAMES } from '@constants';
 import { UserEntity } from './user.entity.js';
 import { FinancialAccountTypeENUM } from '@enums';
 import { CurrencyEntity } from './currency.entity.js';
+import { IdT } from '@database/common/types/id.type.js';
 import { TransactionEntity } from './transaction.entity.js';
-import { ApplyDeletedFilter, PrimaryColumn } from '@database/common/decorators/database.decorators.js';
+import { MoneyT } from '@database/common/types/money.type.js';
 import { EntityRepositoryType, Collection, type Rel } from '@mikro-orm/postgresql';
 import { Entity, ManyToOne, OneToMany, Property, Unique } from '@mikro-orm/decorators/legacy';
 import { FinancialAccountRepository } from '@database/repositories/financial-account.repository.js';
-import { IdT } from '../common/types/id.type.js';
+import { ApplyDeletedFilter, PrimaryColumn } from '@database/common/decorators/database.decorators.js';
 
 @Entity({ tableName: TABLE_NAMES.FINANCIAL_ACCOUNT, repository: () => FinancialAccountRepository })
 @ApplyDeletedFilter()
@@ -31,11 +33,11 @@ export class FinancialAccountEntity {
   @ManyToOne(() => CurrencyEntity, { nullable: false, fieldName: 'CurrencyId', index: true, type: IdT })
   currency!: Rel<CurrencyEntity>;
 
-  @Property({ fieldName: 'InitialBalance', type: 'decimal', precision: 18, scale: 2, default: 0 })
-  initialBalance!: string;
+  @Property({ fieldName: 'InitialBalance', type: MoneyT, default: 0 })
+  initialBalance!: Decimal;
 
-  @Property({ fieldName: 'CurrentBalance', type: 'decimal', precision: 18, scale: 2, default: 0 })
-  currentBalance!: string;
+  @Property({ fieldName: 'CurrentBalance', type: MoneyT, default: 0 })
+  currentBalance!: Decimal;
 
   @Property({ fieldName: 'Description', type: 'text', nullable: true })
   description?: string;

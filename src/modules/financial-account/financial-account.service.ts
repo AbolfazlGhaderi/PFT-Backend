@@ -1,3 +1,4 @@
+import { Decimal } from 'decimal.js';
 import { EntityManager } from '@mikro-orm/postgresql';
 import { Injectable } from '@nestjs/common';
 import { LoggerService } from 'logger-nestjs';
@@ -30,6 +31,7 @@ export class FinancialAccountService {
 
   async find(queryParams: PaginationQueryParamsDTO): Promise<ApiResponseT> {
     this.logger.verbose(`find | Data: ${JSON.stringify(queryParams)}`);
+    // oxlint-disable-next-line typescript/no-unnecessary-type-assertion
     const [items, total] = await this.financialAccountRepository.advanceFinder(queryParams as PaginationQueryParamT<FinancialAccountEntity>, this.clsService);
 
     return { type: 'pagination', data: { total, items } };
@@ -61,8 +63,8 @@ export class FinancialAccountService {
       currency,
       title: createFinancialAccountDTO.title,
       type: createFinancialAccountDTO.type ?? FinancialAccountTypeENUM.BANK,
-      initialBalance: createFinancialAccountDTO.initialBalance ?? '0',
-      currentBalance: createFinancialAccountDTO.initialBalance ?? '0',
+      initialBalance: new Decimal(createFinancialAccountDTO.initialBalance ?? '0'),
+      currentBalance: new Decimal(createFinancialAccountDTO.initialBalance ?? '0'),
       description: createFinancialAccountDTO.description,
       isActive: createFinancialAccountDTO.isActive ?? 1,
     });
@@ -113,7 +115,7 @@ export class FinancialAccountService {
     }
 
     financialAccount.type = updateFinancialAccountDTO.type ?? financialAccount.type;
-    financialAccount.initialBalance = updateFinancialAccountDTO.initialBalance ?? financialAccount.initialBalance;
+    if (updateFinancialAccountDTO.initialBalance) financialAccount.initialBalance = new Decimal(updateFinancialAccountDTO.initialBalance);
     financialAccount.description = updateFinancialAccountDTO.description ?? financialAccount.description;
     financialAccount.isActive = updateFinancialAccountDTO.isActive ?? financialAccount.isActive;
 
