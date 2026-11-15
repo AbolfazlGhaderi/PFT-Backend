@@ -703,7 +703,7 @@
           "length": null,
           "precision": null,
           "scale": null,
-          "default": "0",
+          "default": "1",
           "comment": null,
           "collation": null,
           "enumItems": [],
@@ -1182,8 +1182,8 @@
       "checks": [
         {
           "name": "Transactions_check",
-          "expression": "(\"Type\" IN (1, 2) AND \"ToAccountId\" IS NULL) OR (\"Type\" = 3 AND \"ToAccountId\" IS NOT NULL AND \"AccountId\" != \"ToAccountId\")",
-          "definition": "check ((\"Type\" IN (1, 2) AND \"ToAccountId\" IS NULL) OR (\"Type\" = 3 AND \"ToAccountId\" IS NOT NULL AND \"AccountId\" != \"ToAccountId\"))"
+          "expression": "(\"Type\" IN (1, 2) AND \"ToAccountId\" IS NULL) OR (\"Type\" = 3 AND (\"ToAccountId\" IS NULL OR \"AccountId\" != \"ToAccountId\"))",
+          "definition": "check ((\"Type\" IN (1, 2) AND \"ToAccountId\" IS NULL) OR (\"Type\" = 3 AND (\"ToAccountId\" IS NULL OR \"AccountId\" != \"ToAccountId\")))"
         }
       ],
       "triggers": [],

@@ -10,6 +10,7 @@ import { DEFAULT_LOGGER_CONFIG, CLS_MODULE_CONFIG, THROTTLER_CONFIG } from '@con
 import { DatabaseModule } from '@database';
 import { InitializerService } from './app/plugins/initial/initializer.service.js';
 import { FinancialAccountModule } from './modules/financial-account/financial-account.module.js';
+import { TransactionModule } from './modules/transaction/transaction.module.js';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { FinancialAccountModule } from './modules/financial-account/financial-ac
     LoggerModule.register(DEFAULT_LOGGER_CONFIG),
     DatabaseModule,
     FinancialAccountModule,
+    TransactionModule,
   ],
   controllers: [AppController],
   providers: [AppService, InitializerService],

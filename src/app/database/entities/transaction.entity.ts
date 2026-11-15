@@ -14,7 +14,7 @@ import { Decimal } from 'decimal.js';
 
 @Entity({ tableName: TABLE_NAMES.TRANSACTION, repository: () => TransactionRepository })
 @ApplyDeletedFilter()
-@Check({ expression: '("Type" IN (1, 2) AND "ToAccountId" IS NULL) OR ("Type" = 3 AND "ToAccountId" IS NOT NULL AND "AccountId" != "ToAccountId")' })
+@Check({ expression: '("Type" IN (1, 2) AND "ToAccountId" IS NULL) OR ("Type" = 3 AND ("ToAccountId" IS NULL OR "AccountId" != "ToAccountId"))' })
 export class TransactionEntity {
   [EntityRepositoryType]?: TransactionRepository;
 

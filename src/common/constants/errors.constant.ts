@@ -171,4 +171,40 @@ export const API_ERROR_CODES = {
     HttpStatusCode: 404,
     errorCode: 2032,
   },
+
+  TRANSACTION_NOT_FOUND: {
+    message: 'Transaction not found',
+    HttpStatusCode: 404,
+    errorCode: 2033,
+  },
+  INSUFFICIENT_FUNDS: {
+    message: 'Insufficient funds on the account',
+    HttpStatusCode: 422,
+    errorCode: 2034,
+  },
+  TRANSFER_ACCOUNTS_IDENTICAL: {
+    message: 'Transfer source and destination accounts must differ',
+    HttpStatusCode: 422,
+    errorCode: 2036,
+  },
+  TO_ACCOUNT_NOT_ALLOWED: {
+    message: 'toAccountId is only allowed for TRANSFER transactions',
+    HttpStatusCode: 422,
+    errorCode: 2037,
+  },
+  CURRENCY_MISMATCH: {
+    message: 'Transfer accounts must share the same currency',
+    HttpStatusCode: 422,
+    errorCode: 2038,
+  },
+  CATEGORY_NOT_FOUND: {
+    message: 'Category not found',
+    HttpStatusCode: 404,
+    errorCode: 2039,
+  },
+  INVALID_AMOUNT: {
+    message: 'Amount must be greater than 0 and fee/discount must not be negative',
+    HttpStatusCode: 422,
+    errorCode: 2040,
+  },
 };
