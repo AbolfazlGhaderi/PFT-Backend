@@ -1,6 +1,5 @@
 import { randomUUID } from 'crypto';
 import { TABLE_NAMES } from '@constants';
-import { UserEntity } from './user.entity.js';
 import { CategoryEntity } from './category.entity.js';
 import { PaymentMethodENUM, TransactionTypeENUM } from '@enums';
 import { ApplyDeletedFilter, PrimaryColumn } from '@database/common/decorators/database.decorators.js';
@@ -20,9 +19,6 @@ export class TransactionEntity {
 
   @PrimaryColumn()
   id!: number;
-
-  @ManyToOne(() => UserEntity, { nullable: false, fieldName: 'UserId', index: true, type: IdT })
-  user!: Rel<UserEntity>;
 
   @Property({ fieldName: 'Type', type: 'tinyint', default: TransactionTypeENUM.EXPENSE })
   type!: number;

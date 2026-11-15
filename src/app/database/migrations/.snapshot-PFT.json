@@ -1108,23 +1108,6 @@
           "collation": null,
           "enumItems": [],
           "mappedType": "smallint"
-        },
-        "UserId": {
-          "name": "UserId",
-          "type": "bigint",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": false,
-          "unique": false,
-          "length": null,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "collation": null,
-          "enumItems": [],
-          "mappedType": "bigint"
         }
       },
       "indexes": [
@@ -1155,16 +1138,6 @@
           "composite": false,
           "constraint": false,
           "keyName": "Transactions_ToAccountId_index",
-          "primary": false,
-          "unique": false
-        },
-        {
-          "columnNames": [
-            "UserId"
-          ],
-          "composite": false,
-          "constraint": false,
-          "keyName": "Transactions_UserId_index",
           "primary": false,
           "unique": false
         },
@@ -1222,17 +1195,6 @@
           ],
           "referencedTableName": "public.FinancialAccounts",
           "deleteRule": "set null"
-        },
-        "Transactions_UserId_foreign": {
-          "columnNames": [
-            "UserId"
-          ],
-          "constraintName": "Transactions_UserId_foreign",
-          "localTableName": "public.Transactions",
-          "referencedColumnNames": [
-            "Id"
-          ],
-          "referencedTableName": "public.User"
         }
       },
       "comment": null

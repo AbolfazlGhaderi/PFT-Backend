@@ -4,7 +4,6 @@ import { TABLE_NAMES } from '@constants';
 import { UserSecurityEntity } from './user-security.entity.js';
 import { ApplyDeletedFilter, PrimaryColumn } from '@database/common/decorators/database.decorators.js';
 import { FinancialAccountEntity } from './financial-account.entity.js';
-import { TransactionEntity } from './transaction.entity.js';
 import { Collection, EntityRepositoryType, type Rel } from '@mikro-orm/postgresql';
 import { UserRepository } from '@database/repositories/user.repository.js';
 import { Entity, OneToMany, OneToOne, Property, Unique } from '@mikro-orm/decorators/legacy';
@@ -64,9 +63,6 @@ export class UserEntity {
 
   @OneToMany(() => FinancialAccountEntity, account => account.user)
   financialAccounts = new Collection<FinancialAccountEntity>(this);
-
-  @OneToMany(() => TransactionEntity, transaction => transaction.user)
-  transactions = new Collection<TransactionEntity>(this);
 
   @OneToOne(() => UserSecurityEntity, entity => entity.user, { hidden: true })
   security?: Rel<UserSecurityEntity>;

@@ -49,7 +49,6 @@ export function ApiFindAllTransactionSwaggerConfig() {
                   items: [
                     {
                       id: 1,
-                      user: 1,
                       type: 1,
                       account: 1,
                       toAccount: null,

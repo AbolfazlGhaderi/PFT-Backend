@@ -12,10 +12,6 @@ export function ApiCreateTransactionSwaggerConfig() {
       schema: {
         type: 'object',
         properties: {
-          userId: {
-            type: 'number',
-            description: 'User ID',
-          },
           type: {
             type: 'number',
             description: '1: Expense, 2: Income, 3: Transfer',
@@ -58,7 +54,7 @@ export function ApiCreateTransactionSwaggerConfig() {
             description: 'Invoice reference (max 300 chars)',
           },
         },
-        required: ['userId', 'type', 'accountId', 'amount'],
+        required: ['type', 'accountId', 'amount'],
       },
       examples: {
         createExample: {
@@ -75,7 +71,6 @@ Rules:
 | atomicity                         | insert + balance updates run in a single DB transaction        |
 `,
           value: {
-            userId: 1,
             type: 1,
             accountId: 1,
             categoryId: 1,

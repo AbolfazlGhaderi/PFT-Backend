@@ -4,11 +4,6 @@ import { IsEnum, IsNotEmpty, IsNumber, IsNumberString, IsOptional, IsString, Max
 import { PaymentMethodENUM, TransactionTypeENUM } from '@enums';
 
 export class CreateTransactionDTO {
-  @ApiProperty({ example: 1, description: 'User ID' })
-  @IsNumber()
-  @IsNotEmpty()
-  userId!: number;
-
   @ApiProperty({ example: TransactionTypeENUM.EXPENSE, description: '1: Expense, 2: Income, 3: Transfer' })
   @IsEnum(TransactionTypeENUM)
   @IsNotEmpty()

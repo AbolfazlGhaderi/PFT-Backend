@@ -7,7 +7,6 @@ import { ClsService } from 'nestjs-cls';
 import { CategoryEntity } from '@database/entities/category.entity.js';
 import { FinancialAccountEntity } from '@database/entities/financial-account.entity.js';
 import { TransactionEntity } from '@database/entities/transaction.entity.js';
-import { UserEntity } from '@database/entities/user.entity.js';
 import { TransactionRepository } from '@database/repositories/transaction.repository.js';
 import { API_ERROR_CODES } from '@constants';
 import { PaginationQueryParamsDTO } from '@DTOs';
@@ -51,12 +50,6 @@ export class TransactionService {
     this.validateTypeAndToAccount(createTransactionDTO.type, createTransactionDTO.accountId, createTransactionDTO.toAccountId);
 
     const transaction = await this.em.transactional(async tem => {
-      const user = await tem.findOne(UserEntity, { id: createTransactionDTO.userId });
-      if (!user) {
-        this.logger.error(`User not found with ID: ${createTransactionDTO.userId}`);
-        throw new ApiException(API_ERROR_CODES.USER_NOT_FOUND);
-      }
-
       let category: CategoryEntity | undefined;
       if (createTransactionDTO.categoryId) {
         category = (await tem.findOne(CategoryEntity, { id: createTransactionDTO.categoryId })) ?? undefined;
@@ -74,7 +67,6 @@ export class TransactionService {
       }
 
       const transaction = tem.create(TransactionEntity, {
-        user,
         account,
         toAccount,
         category,
@@ -253,7 +245,6 @@ export class TransactionService {
   private toResponseData(transaction: TransactionEntity) {
     return {
       id: transaction.id,
-      userId: transaction.user.id,
       type: transaction.type,
       accountId: transaction.account.id,
       toAccountId: transaction.toAccount?.id ?? null,
