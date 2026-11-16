@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { UseRequestContext } from '@decorators';
 import { LoggerService } from 'logger-nestjs';
-import { UserRepository, UserSecurityRepository, CurrencyRepository, CategoryRepository, CategoryEntity } from '@database';
+import { UserRepository, UserSecurityRepository, CurrencyRepository, CategoryRepository, UseRequestContext } from '@database';
 import { CategoryTypeENUM, UserStatusENUM } from '@enums';
 import { MikroORM } from '@mikro-orm/postgresql';
 
@@ -59,12 +58,14 @@ export class InitializerService {
       phoneVerifiedAt: new Date(),
       status: UserStatusENUM.ACTIVE,
       statusReason: 'Initial Seed User',
+      isDeleted: 0,
     });
 
     const userSecurity = this.userSecurityRepository.create({
       user,
       passwordHash: '123456',
       twoFactorEnabled: 0,
+      isDeleted: 0,
     });
 
     this.orm.em.persist([user, userSecurity]);
@@ -97,7 +98,7 @@ export class InitializerService {
     for (const currencyData of currencies) {
       const exists = await this.currencyRepository.findOne({ code: currencyData.code });
       if (!exists) {
-        const currency = this.currencyRepository.create(currencyData);
+        const currency = this.currencyRepository.create({ ...currencyData, isDeleted: 0 });
         this.orm.em.persist(currency);
         insertedCount++;
       }
@@ -590,6 +591,7 @@ export class InitializerService {
             value: parentData.value,
             description: parentData.description,
             type,
+            isDeleted: 0,
           });
           this.orm.em.persist(parent);
           await this.orm.em.flush();
@@ -613,6 +615,7 @@ export class InitializerService {
                 description: childData.description,
                 type,
                 parent,
+                isDeleted: 0,
               });
               this.orm.em.persist(child);
               childCount++;
