@@ -42,23 +42,6 @@
           "enumItems": [],
           "mappedType": "bigint"
         },
-        "DeletedAt_UTC": {
-          "name": "DeletedAt_UTC",
-          "type": "timestamptz(6)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": true,
-          "unique": false,
-          "length": 6,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "collation": null,
-          "enumItems": [],
-          "mappedType": "datetime"
-        },
         "Description": {
           "name": "Description",
           "type": "text",
@@ -92,6 +75,23 @@
           "collation": null,
           "enumItems": [],
           "mappedType": "bigint"
+        },
+        "IsDeleted": {
+          "name": "IsDeleted",
+          "type": "smallint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "0",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "smallint"
         },
         "Key": {
           "name": "Key",
@@ -199,14 +199,14 @@
       "indexes": [
         {
           "columnNames": [
-            "Key",
-            "DeletedAt_UTC"
+            "Key"
           ],
-          "composite": true,
-          "constraint": true,
-          "keyName": "Categories_Key_DeletedAt_UTC_unique",
+          "composite": false,
+          "constraint": false,
+          "keyName": "Categories_Key_unique",
           "primary": false,
-          "unique": true
+          "unique": true,
+          "where": "\"IsDeleted\" = 0"
         },
         {
           "columnNames": [
@@ -319,23 +319,6 @@
           "enumItems": [],
           "mappedType": "smallint"
         },
-        "DeletedAt_UTC": {
-          "name": "DeletedAt_UTC",
-          "type": "timestamptz(6)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": true,
-          "unique": false,
-          "length": 6,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "collation": null,
-          "enumItems": [],
-          "mappedType": "datetime"
-        },
         "Description": {
           "name": "Description",
           "type": "text",
@@ -369,6 +352,23 @@
           "collation": null,
           "enumItems": [],
           "mappedType": "bigint"
+        },
+        "IsDeleted": {
+          "name": "IsDeleted",
+          "type": "smallint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "0",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "smallint"
         },
         "ModifiedAt_UTC": {
           "name": "ModifiedAt_UTC",
@@ -442,14 +442,14 @@
       "indexes": [
         {
           "columnNames": [
-            "Code",
-            "DeletedAt_UTC"
+            "Code"
           ],
-          "composite": true,
-          "constraint": true,
-          "keyName": "Currencies_Code_DeletedAt_UTC_unique",
+          "composite": false,
+          "constraint": false,
+          "keyName": "Currencies_Code_unique",
           "primary": false,
-          "unique": true
+          "unique": true,
+          "where": "\"IsDeleted\" = 0"
         },
         {
           "columnNames": [
@@ -539,23 +539,6 @@
           "enumItems": [],
           "mappedType": "bigint"
         },
-        "DeletedAt_UTC": {
-          "name": "DeletedAt_UTC",
-          "type": "timestamptz(6)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": true,
-          "unique": false,
-          "length": 6,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "collation": null,
-          "enumItems": [],
-          "mappedType": "datetime"
-        },
         "Description": {
           "name": "Description",
           "type": "text",
@@ -606,6 +589,23 @@
           "collation": null,
           "enumItems": [],
           "mappedType": "integer"
+        },
+        "IsDeleted": {
+          "name": "IsDeleted",
+          "type": "smallint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "0",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "smallint"
         },
         "ModifiedAt_UTC": {
           "name": "ModifiedAt_UTC",
@@ -808,23 +808,6 @@
           "enumItems": [],
           "mappedType": "smallint"
         },
-        "DeletedAt_UTC": {
-          "name": "DeletedAt_UTC",
-          "type": "timestamptz(6)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": true,
-          "unique": false,
-          "length": 6,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "collation": null,
-          "enumItems": [],
-          "mappedType": "datetime"
-        },
         "Description": {
           "name": "Description",
           "type": "text",
@@ -922,6 +905,23 @@
           "precision": null,
           "scale": null,
           "default": "1",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "smallint"
+        },
+        "IsDeleted": {
+          "name": "IsDeleted",
+          "type": "smallint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "0",
           "comment": null,
           "collation": null,
           "enumItems": [],
@@ -1198,23 +1198,6 @@
           "enumItems": [],
           "mappedType": "decimal"
         },
-        "DeletedAt_UTC": {
-          "name": "DeletedAt_UTC",
-          "type": "timestamptz(6)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": true,
-          "unique": false,
-          "length": 6,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "collation": null,
-          "enumItems": [],
-          "mappedType": "datetime"
-        },
         "Description": {
           "name": "Description",
           "type": "text",
@@ -1278,6 +1261,23 @@
           "precision": null,
           "scale": null,
           "default": "1",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "smallint"
+        },
+        "IsDeleted": {
+          "name": "IsDeleted",
+          "type": "smallint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "0",
           "comment": null,
           "collation": null,
           "enumItems": [],
@@ -1400,14 +1400,14 @@
         {
           "columnNames": [
             "UserId",
-            "Title",
-            "DeletedAt_UTC"
+            "Title"
           ],
           "composite": true,
-          "constraint": true,
-          "keyName": "FinancialAccounts_UserId_Title_DeletedAt_UTC_unique",
+          "constraint": false,
+          "keyName": "FinancialAccounts_UserId_Title_unique",
           "primary": false,
-          "unique": true
+          "unique": true,
+          "where": "\"IsDeleted\" = 0"
         },
         {
           "columnNames": [
@@ -1547,23 +1547,6 @@
           "enumItems": [],
           "mappedType": "bigint"
         },
-        "DeletedAt_UTC": {
-          "name": "DeletedAt_UTC",
-          "type": "timestamptz(6)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": true,
-          "unique": false,
-          "length": 6,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "collation": null,
-          "enumItems": [],
-          "mappedType": "datetime"
-        },
         "Description": {
           "name": "Description",
           "type": "text",
@@ -1648,6 +1631,23 @@
           "collation": null,
           "enumItems": [],
           "mappedType": "string"
+        },
+        "IsDeleted": {
+          "name": "IsDeleted",
+          "type": "smallint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "0",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "smallint"
         },
         "ModifiedAt_UTC": {
           "name": "ModifiedAt_UTC",
@@ -1896,23 +1896,6 @@
           "enumItems": [],
           "mappedType": "bigint"
         },
-        "DeletedAt_UTC": {
-          "name": "DeletedAt_UTC",
-          "type": "timestamptz(6)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": true,
-          "unique": false,
-          "length": 6,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "collation": null,
-          "enumItems": [],
-          "mappedType": "datetime"
-        },
         "Id": {
           "name": "Id",
           "type": "bigint",
@@ -1929,6 +1912,23 @@
           "collation": null,
           "enumItems": [],
           "mappedType": "bigint"
+        },
+        "IsDeleted": {
+          "name": "IsDeleted",
+          "type": "smallint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "0",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "smallint"
         },
         "ModifiedAt_UTC": {
           "name": "ModifiedAt_UTC",
@@ -2053,14 +2053,14 @@
       "indexes": [
         {
           "columnNames": [
-            "PhoneNumber",
-            "DeletedAt_UTC"
+            "PhoneNumber"
           ],
-          "composite": true,
-          "constraint": true,
-          "keyName": "User_PhoneNumber_DeletedAt_UTC_unique",
+          "composite": false,
+          "constraint": false,
+          "keyName": "User_PhoneNumber_unique",
           "primary": false,
-          "unique": true
+          "unique": true,
+          "where": "\"IsDeleted\" = 0"
         },
         {
           "columnNames": [
@@ -2133,23 +2133,6 @@
           "enumItems": [],
           "mappedType": "bigint"
         },
-        "DeletedAt_UTC": {
-          "name": "DeletedAt_UTC",
-          "type": "timestamptz(6)",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": true,
-          "unique": false,
-          "length": 6,
-          "precision": null,
-          "scale": null,
-          "default": null,
-          "comment": null,
-          "collation": null,
-          "enumItems": [],
-          "mappedType": "datetime"
-        },
         "Id": {
           "name": "Id",
           "type": "bigint",
@@ -2166,6 +2149,23 @@
           "collation": null,
           "enumItems": [],
           "mappedType": "bigint"
+        },
+        "IsDeleted": {
+          "name": "IsDeleted",
+          "type": "smallint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "unique": false,
+          "length": null,
+          "precision": null,
+          "scale": null,
+          "default": "0",
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "smallint"
         },
         "ModifiedAt_UTC": {
           "name": "ModifiedAt_UTC",
@@ -2307,17 +2307,6 @@
       "indexes": [
         {
           "columnNames": [
-            "UserId",
-            "DeletedAt_UTC"
-          ],
-          "composite": true,
-          "constraint": true,
-          "keyName": "UserSecurity_UserId_DeletedAt_UTC_unique",
-          "primary": false,
-          "unique": true
-        },
-        {
-          "columnNames": [
             "UserId"
           ],
           "composite": false,
@@ -2331,10 +2320,11 @@
             "UserId"
           ],
           "composite": false,
-          "constraint": true,
+          "constraint": false,
           "keyName": "UserSecurity_UserId_unique",
           "primary": false,
-          "unique": true
+          "unique": true,
+          "where": "\"IsDeleted\" = 0"
         },
         {
           "columnNames": [
