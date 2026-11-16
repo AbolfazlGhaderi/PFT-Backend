@@ -207,4 +207,20 @@ export const API_ERROR_CODES = {
     HttpStatusCode: 422,
     errorCode: 2040,
   },
+
+  DEBT_NOT_FOUND: {
+    message: 'Debt not found',
+    HttpStatusCode: 404,
+    errorCode: 2041,
+  },
+  DEBT_PAYMENT_NOT_FOUND: {
+    message: 'Debt payment not found',
+    HttpStatusCode: 404,
+    errorCode: 2042,
+  },
+  INVALID_DEBT_AMOUNT: {
+    message: 'Total amount must be greater than 0 and initial payment must be between 0 and total amount',
+    HttpStatusCode: 422,
+    errorCode: 2043,
+  },
 };

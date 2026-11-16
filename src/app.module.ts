@@ -11,6 +11,8 @@ import { DatabaseModule } from '@database';
 import { InitializerService } from './app/plugins/initial/initializer.service.js';
 import { FinancialAccountModule } from './modules/financial-account/financial-account.module.js';
 import { TransactionModule } from './modules/transaction/transaction.module.js';
+import { DebtModule } from './modules/debt/debt.module.js';
+import { DebtPaymentModule } from './modules/debt-payment/debt-payment.module.js';
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { TransactionModule } from './modules/transaction/transaction.module.js';
     DatabaseModule,
     FinancialAccountModule,
     TransactionModule,
+    DebtModule,
+    DebtPaymentModule,
   ],
   controllers: [AppController],
   providers: [AppService, InitializerService],
