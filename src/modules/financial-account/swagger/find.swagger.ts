@@ -61,7 +61,7 @@ export function ApiFindAllFinancialAccountSwaggerConfig() {
                       createdBy: null,
                       modifiedAt: '2026-06-16T08:00:00.000Z',
                       modifiedBy: null,
-                      deletedAt: null,
+                      isDeleted: null,
                     },
                     {
                       id: 2,
@@ -77,7 +77,7 @@ export function ApiFindAllFinancialAccountSwaggerConfig() {
                       createdBy: null,
                       modifiedAt: '2026-06-16T08:00:00.000Z',
                       modifiedBy: null,
-                      deletedAt: null,
+                      isDeleted: null,
                     },
                   ],
                 },

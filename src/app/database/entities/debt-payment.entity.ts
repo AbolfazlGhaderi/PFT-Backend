@@ -1,11 +1,11 @@
 import { randomUUID } from 'crypto';
 import { TABLE_NAMES } from '@constants';
-import { ApplyDeletedFilter, PrimaryColumn } from '@database/common/decorators/database.decorators.js';
+import { ApplyDeletedFilter, PrimaryColumn } from '@database/common/decorators/index.js';
+import { MoneyT } from '@database/common/types/money.type.js';
 import { EntityRepositoryType, type Rel } from '@mikro-orm/postgresql';
 import { Entity, ManyToOne, Property } from '@mikro-orm/decorators/legacy';
 import { DebtPaymentRepository } from '@database/repositories/debt-payment.repository.js';
 import { IdT } from '@database/common/types/id.type.js';
-import { MoneyT } from '@database/common/types/money.type.js';
 import { Decimal } from 'decimal.js';
 import { DebtEntity } from './debt.entity.js';
 import { TransactionEntity } from './transaction.entity.js';
@@ -58,6 +58,6 @@ export class DebtPaymentEntity {
   @Property({ name: 'ModifiedBy', type: IdT, nullable: true, unsigned: true })
   modifiedBy?: number;
 
-  @Property({ fieldName: 'DeletedAt_UTC', type: 'timestamptz', nullable: true })
-  deletedAt?: Date;
+  @Property({ fieldName: 'IsDeleted', type: 'smallint', default: 0 })
+  isDeleted!: number;
 }

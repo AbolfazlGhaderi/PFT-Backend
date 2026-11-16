@@ -1,15 +1,15 @@
 import { randomUUID } from 'crypto';
+import { Decimal } from 'decimal.js';
 import { TABLE_NAMES } from '@constants';
 import { CategoryEntity } from './category.entity.js';
+import { IdT } from '@database/common/types/id.type.js';
 import { PaymentMethodENUM, TransactionTypeENUM } from '@enums';
-import { ApplyDeletedFilter, PrimaryColumn } from '@database/common/decorators/database.decorators.js';
+import { ApplyDeletedFilter, PrimaryColumn } from '@database/common/decorators/index.js';
+import { MoneyT } from '@database/common/types/money.type.js';
 import { FinancialAccountEntity } from './financial-account.entity.js';
 import { EntityRepositoryType, type Rel } from '@mikro-orm/postgresql';
 import { Check, Entity, ManyToOne, Property } from '@mikro-orm/decorators/legacy';
 import { TransactionRepository } from '@database/repositories/transaction.repository.js';
-import { IdT } from '@database/common/types/id.type.js';
-import { MoneyT } from '@database/common/types/money.type.js';
-import { Decimal } from 'decimal.js';
 
 @Entity({ tableName: TABLE_NAMES.TRANSACTION, repository: () => TransactionRepository })
 @ApplyDeletedFilter()
@@ -75,6 +75,6 @@ export class TransactionEntity {
   @Property({ name: 'ModifiedBy', type: IdT, nullable: true, unsigned: true })
   modifiedBy?: number;
 
-  @Property({ fieldName: 'DeletedAt_UTC', type: 'timestamptz', nullable: true })
-  deletedAt?: Date;
+  @Property({ fieldName: 'IsDeleted', type: 'smallint', default: 0 })
+  isDeleted!: number;
 }

@@ -1,12 +1,12 @@
 import { randomUUID } from 'crypto';
 import { TABLE_NAMES } from '@constants';
 import { DebtStatusENUM, DebtTypeENUM, InstallmentIntervalENUM } from '@enums';
-import { ApplyDeletedFilter, PrimaryColumn } from '@database/common/decorators/database.decorators.js';
+import { ApplyDeletedFilter, PrimaryColumn } from '@database/common/decorators/index.js';
+import { MoneyT } from '@database/common/types/money.type.js';
 import { Check, Entity, ManyToOne, OneToMany, Property } from '@mikro-orm/decorators/legacy';
 import { DebtRepository } from '@database/repositories/debt.repository.js';
 import { EntityRepositoryType, Collection, type Rel } from '@mikro-orm/postgresql';
 import { IdT } from '@database/common/types/id.type.js';
-import { MoneyT } from '@database/common/types/money.type.js';
 import { Decimal } from 'decimal.js';
 import { DebtPaymentEntity } from './debt-payment.entity.js';
 import { UserEntity } from './user.entity.js';
@@ -78,8 +78,8 @@ export class DebtEntity {
   @Property({ name: 'ModifiedBy', type: IdT, nullable: true, unsigned: true })
   modifiedBy?: number;
 
-  @Property({ fieldName: 'DeletedAt_UTC', type: 'timestamptz', nullable: true })
-  deletedAt?: Date;
+  @Property({ fieldName: 'IsDeleted', type: 'smallint', default: 0 })
+  isDeleted!: number;
 
   @OneToMany(() => DebtPaymentEntity, payment => payment.debt)
   payments = new Collection<DebtPaymentEntity>(this);

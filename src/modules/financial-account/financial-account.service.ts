@@ -67,6 +67,7 @@ export class FinancialAccountService {
       currentBalance: new Decimal(createFinancialAccountDTO.initialBalance ?? '0'),
       description: createFinancialAccountDTO.description,
       isActive: createFinancialAccountDTO.isActive ?? 1,
+      isDeleted: 0,
     });
 
     await this.em.flush();
@@ -146,7 +147,7 @@ export class FinancialAccountService {
       throw new ApiException(API_ERROR_CODES.FINANCIAL_ACCOUNT_NOT_FOUND);
     }
 
-    financialAccount.deletedAt = new Date();
+    financialAccount.isDeleted = 1;
     await this.em.flush();
     this.logger.log(`Financial account deleted with ID: ${id}`);
     return {

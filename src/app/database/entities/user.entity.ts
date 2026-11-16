@@ -1,18 +1,21 @@
 import { randomUUID } from 'crypto';
 import { UserStatusENUM } from '@enums';
 import { TABLE_NAMES } from '@constants';
-import { UserSecurityEntity } from './user-security.entity.js';
-import { ApplyDeletedFilter, PrimaryColumn } from '@database/common/decorators/database.decorators.js';
-import { FinancialAccountEntity } from './financial-account.entity.js';
-import { Collection, EntityRepositoryType, type Rel } from '@mikro-orm/postgresql';
-import { UserRepository } from '@database/repositories/user.repository.js';
-import { Entity, OneToMany, OneToOne, Property, Unique } from '@mikro-orm/decorators/legacy';
-import { IdT } from '@database/common/types/id.type.js';
 import { DebtEntity } from './debt.entity.js';
+import { IdT } from '@database/common/types/id.type.js';
+import { ApplyDeletedFilter, PrimaryColumn } from '@database/common/decorators/index.js';
+import { UserSecurityEntity } from './user-security.entity.js';
+import { FinancialAccountEntity } from './financial-account.entity.js';
+import { UserRepository } from '@database/repositories/user.repository.js';
+import { Collection, EntityRepositoryType, type Rel } from '@mikro-orm/postgresql';
+import { Entity, Index, OneToMany, OneToOne, Property, Unique } from '@mikro-orm/decorators/legacy';
 
 @Entity({ tableName: TABLE_NAMES.USER, repository: () => UserRepository })
 @ApplyDeletedFilter()
-@Unique({ properties: ['phoneNumber', 'deletedAt'] })
+@Unique({
+    properties: ['phoneNumber'],
+    where: { isDeleted: 0 },
+})
 export class UserEntity {
   [EntityRepositoryType]?: UserRepository;
 
@@ -59,8 +62,8 @@ export class UserEntity {
   @Property({ name: 'ModifiedBy', type: IdT, unsigned: true, nullable: true })
   modifiedBy?: number;
 
-  @Property({ fieldName: 'DeletedAt_UTC', type: 'timestamptz', nullable: true })
-  deletedAt?: Date;
+  @Property({ fieldName: 'IsDeleted', type: 'smallint', default: 0 })
+  isDeleted!: number;
 
   @OneToMany(() => FinancialAccountEntity, account => account.user)
   financialAccounts = new Collection<FinancialAccountEntity>(this);
@@ -68,6 +71,6 @@ export class UserEntity {
   @OneToMany(() => DebtEntity, debt => debt.user)
   debts?: Rel<DebtEntity>;
 
-  @OneToOne(() => UserSecurityEntity, entity => entity.user, { hidden: true })
+  @OneToOne(() => UserSecurityEntity, entity => entity.user, { hidden: true, unique: false })
   security?: Rel<UserSecurityEntity>;
 }

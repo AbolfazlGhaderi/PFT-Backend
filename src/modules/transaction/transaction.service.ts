@@ -78,6 +78,7 @@ export class TransactionService {
         paymentMethod: createTransactionDTO.paymentMethod ?? PaymentMethodENUM.CARD,
         description: createTransactionDTO.description,
         invoice: createTransactionDTO.invoice,
+        isDeleted: 0,
       });
 
       this.applyBalanceDeltas(createTransactionDTO.type, account, toAccount, amount, totalAmount, 1);
@@ -181,7 +182,7 @@ export class TransactionService {
       const toAccount = transaction.toAccount ? await this.lockAccount(tem, transaction.toAccount.id) : undefined;
       this.applyBalanceDeltas(transaction.type, account, toAccount, transaction.amount, transaction.totalAmount, -1);
 
-      transaction.deletedAt = new Date();
+      transaction.isDeleted = 1;
       await tem.flush();
     });
 

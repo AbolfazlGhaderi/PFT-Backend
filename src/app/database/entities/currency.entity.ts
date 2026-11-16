@@ -1,5 +1,5 @@
 import { TABLE_NAMES } from '@constants';
-import { ApplyDeletedFilter, PrimaryColumn } from '@database/common/decorators/database.decorators.js';
+import { ApplyDeletedFilter, PrimaryColumn } from '@database/common/decorators/index.js';
 import { Collection, EntityRepositoryType } from '@mikro-orm/postgresql';
 import { Entity, OneToMany, Property, Unique } from '@mikro-orm/decorators/legacy';
 import { CurrencyRepository } from '@database/repositories/currency.repository.js';
@@ -8,7 +8,10 @@ import { IdT } from '@database/common/types/id.type.js';
 
 @Entity({ tableName: TABLE_NAMES.CURRENCY, repository: () => CurrencyRepository })
 @ApplyDeletedFilter()
-@Unique({ properties: ['code', 'deletedAt'] })
+@Unique({
+    properties: ['code'],
+    where: { isDeleted: 0 },
+})
 export class CurrencyEntity {
   [EntityRepositoryType]?: CurrencyRepository;
 
@@ -49,8 +52,8 @@ export class CurrencyEntity {
   @Property({ name: 'ModifiedBy', type: IdT, nullable: true, unsigned: true })
   modifiedBy?: number;
 
-  @Property({ fieldName: 'DeletedAt_UTC', type: 'timestamptz', nullable: true })
-  deletedAt?: Date;
+  @Property({ fieldName: 'IsDeleted', type: 'smallint', default: 0 })
+  isDeleted!: number;
 
   @OneToMany(() => FinancialAccountEntity, entity => entity.currency)
   financialAccounts = new Collection<FinancialAccountEntity>(this);

@@ -63,6 +63,7 @@ export class DebtService {
       installmentInterval: createDebtDTO.installmentInterval ?? InstallmentIntervalENUM.ONE_TIME,
       dueDate: createDebtDTO.dueDate ? new Date(createDebtDTO.dueDate) : undefined,
       description: createDebtDTO.description,
+      isDeleted: 0,
     });
 
     await this.em.flush();
@@ -115,7 +116,7 @@ export class DebtService {
       throw new ApiException(API_ERROR_CODES.DEBT_NOT_FOUND);
     }
 
-    debt.deletedAt = new Date();
+    debt.isDeleted = 1;
     await this.em.flush();
     this.logger.log(`Debt deleted with ID: ${id}`);
     return {

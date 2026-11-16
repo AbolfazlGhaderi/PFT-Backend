@@ -63,6 +63,7 @@ export class DebtPaymentService {
       amount,
       paidAt: createDebtPaymentDTO.paidAt ? new Date(createDebtPaymentDTO.paidAt) : new Date(),
       description: createDebtPaymentDTO.description,
+      isDeleted: 0,
     });
 
     await this.em.flush();
@@ -107,7 +108,7 @@ export class DebtPaymentService {
       throw new ApiException(API_ERROR_CODES.DEBT_PAYMENT_NOT_FOUND);
     }
 
-    debtPayment.deletedAt = new Date();
+    debtPayment.isDeleted = 1;
     await this.em.flush();
     this.logger.log(`Debt payment deleted with ID: ${id}`);
     return {
