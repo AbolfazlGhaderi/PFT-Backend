@@ -1,3 +1,4 @@
+// oxlint-disable typescript/no-unsafe-assignment typescript/no-unsafe-member-access
 import { LoggerService } from 'logger-nestjs';
 
 import { DEFAULT_LOGGER_CONFIG } from '@configs';
@@ -9,7 +10,7 @@ const getMethodName = (target: unknown, propertyKey: string | symbol) => {
 
 export function UseRequestContext() {
   return function (
-    target: any, // Class,
+    target: object, // Class,
     propertyKey: string, // Method name
     descriptor: PropertyDescriptor, // { value: [AsyncFunction: start], writable, enumerable, configurable }
   ) {
@@ -18,8 +19,8 @@ export function UseRequestContext() {
     const methodName = getMethodName(target, propertyKey);
     const logger = new LoggerService(DEFAULT_LOGGER_CONFIG).setContext(`${className}.${methodName}`);
 
-    descriptor.value = async function (...args: any[]) {
-      const orm: MikroORM = (this as any).orm;
+    descriptor.value = async function (...args: unknown[]) {
+      const orm: MikroORM = (this as { orm: MikroORM }).orm;
 
       if (!orm) {
         logger.error('MikroORM instance not found on class (property "orm"). you must inject "orm: MikroOrm" in main class');

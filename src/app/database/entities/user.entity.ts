@@ -8,13 +8,13 @@ import { UserSecurityEntity } from './user-security.entity.js';
 import { FinancialAccountEntity } from './financial-account.entity.js';
 import { UserRepository } from '@database/repositories/user.repository.js';
 import { Collection, EntityRepositoryType, type Rel } from '@mikro-orm/postgresql';
-import { Entity, Index, OneToMany, OneToOne, Property, Unique } from '@mikro-orm/decorators/legacy';
+import { Entity, OneToMany, OneToOne, Property, Unique } from '@mikro-orm/decorators/legacy';
 
 @Entity({ tableName: TABLE_NAMES.USER, repository: () => UserRepository })
 @ApplyDeletedFilter()
 @Unique({
-    properties: ['phoneNumber'],
-    where: { isDeleted: 0 },
+  properties: ['phoneNumber'],
+  where: { isDeleted: 0 },
 })
 export class UserEntity {
   [EntityRepositoryType]?: UserRepository;

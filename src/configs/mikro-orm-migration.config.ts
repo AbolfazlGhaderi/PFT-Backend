@@ -10,7 +10,6 @@ EnvLoaderService.load();
 const baseDir = process.cwd();
 const DATABASE_DIR = 'app/database';
 const DATABASE_ENTITIES_PATH_JS = `dist/${DATABASE_DIR}/entities/**.entity.js`;
-const DATABASE_ENTITIES_PATH_TS = `src/${DATABASE_DIR}/entities/**.entity.ts`;
 
 const DATABASE_MIGRATIONS_PATH_JS = `dist/${DATABASE_DIR}/migrations`;
 const DATABASE_MIGRATIONS_PATH_TS = `src/${DATABASE_DIR}/migrations`;

@@ -12,7 +12,6 @@ import { HttpExceptionFilter } from '@exceptionsFilters';
 import { TrimStringPipe } from '@pipes';
 import { ValidationPipe } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { ExpressRouteLayer } from '@types';
 
 async function bootstrap() {
   const logger = new LoggerService(DEFAULT_LOGGER_CONFIG).setContext('BOOTSTRAP');
@@ -40,27 +39,6 @@ async function bootstrap() {
 
   app.getHttpAdapter().all('/', (_: Request, response: Response) => response.send());
   app.getHttpAdapter().all('/api', (_: Request, response: Response) => response.send());
-  app.getHttpAdapter().get('/apis', (_: Request, response: Response) => {
-    const authHeader = _.headers['authorization'];
-
-    if (!authHeader || !authHeader.startsWith('Basic ')) {
-      response.setHeader('WWW-Authenticate', 'Basic realm="Restricted"');
-      return response.status(401).send('Authentication required.');
-    }
-    const base64Credentials = authHeader.split(' ')[1];
-    const credentials = Buffer.from(base64Credentials, 'base64').toString('ascii');
-    const [username, password] = credentials.split(':');
-
-    if (username !== 'admin' || password !== '1234') {
-      response.setHeader('WWW-Authenticate', 'Basic realm="Restricted"');
-      return response.status(401).send('Invalid credentials.');
-    }
-
-    const server = app.getHttpServer();
-    const router = server._events.request.router;
-    const routes = (router.stack as ExpressRouteLayer[]).filter(layer => layer.route?.path.startsWith('/api/')).map(layer => layer.route?.path);
-    response.json(routes);
-  });
 
   app.use(
     helmet({

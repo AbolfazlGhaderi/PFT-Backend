@@ -42,8 +42,8 @@ export type WithoutResponseT = {
 export type ApiResponseT = PaginationResponseT | ObjectResponseT | ArrayResponseT | WithoutResponseT;
 export type DefaultSuccessResponseT = {
   ok: boolean;
-  statusCode: number;
   timestamp: number;
+  // oxlint-disable-next-line typescript/no-explicit-any
   data: any;
 };
 

@@ -9,8 +9,8 @@ import { ApplyDeletedFilter, PrimaryColumn } from '@database/common/decorators/i
 @Entity({ tableName: TABLE_NAMES.CATEGORY, repository: () => CategoryRepository })
 @ApplyDeletedFilter()
 @Unique({
-    properties: ['key'],
-    where: { isDeleted: 0 },
+  properties: ['key'],
+  where: { isDeleted: 0 },
 })
 export class CategoryEntity {
   [EntityRepositoryType]?: CategoryRepository;

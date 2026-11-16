@@ -212,7 +212,7 @@ export class TransactionService {
     const accountBalance = account.currentBalance.plus(accountDelta.times(direction));
     // funds are checked only when applying (direction 1); a revert restores the historical state and may go negative
     if (direction === 1 && accountBalance.isNegative()) {
-      this.logger.error(`Insufficient funds on account ${account.id}: current ${account.currentBalance}, required ${accountDelta}`);
+      this.logger.error(`Insufficient funds on account ${account.id}: current ${account.currentBalance.toString()}, required ${accountDelta.toString()}`);
       throw new ApiException(API_ERROR_CODES.INSUFFICIENT_FUNDS);
     }
     account.currentBalance = accountBalance;

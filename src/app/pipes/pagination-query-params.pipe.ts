@@ -10,11 +10,10 @@ import { DEFAULT_LOGGER_CONFIG, API_ERROR_CODES } from '@constants';
 @Injectable()
 export class PaginationQueryParamsPipe implements PipeTransform {
   //   transform(value: any, metadata: ArgumentMetadata): FindAllDto {
+  // oxlint-disable-next-line typescript/no-explicit-any
   transform(value: any): PaginationQueryParamsDTO {
     try {
-      console.log(value); // TODO:
       const { where, orderBy, fields, limit, page } = value;
-      //   if ((!limit || isNumberString(limit)) && (limit && isNumber(limit)))
       const { limit: limitProcessed, page: pageProcessed, skip } = PaginationConfig({ limit, page });
 
       // Where ----------------------------------------------------------------

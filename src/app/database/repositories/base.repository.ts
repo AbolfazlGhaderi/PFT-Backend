@@ -42,22 +42,19 @@ export abstract class BaseRepository<Entity extends object> extends EntityReposi
     // Find One -----------------------------------------
     if (Reflect.has(query.where || {}, 'id') && typeof Reflect.get(query?.where, 'id') !== 'object') {
       const result = await this.findOne(query.where, {
-        // @ts-expect-error
-        fields: query.fields,
+        fields: query.fields as never[],
         filters,
       });
 
       if (!result) return [[], 0];
-      // @ts-expect-error
-      return [result, 1];
+
+      return [result as Entity[], 1];
     }
 
     // FIndAll -----------------------------------------------------------
-    // @ts-expect-error
     return await this.findAndCount(query.where, {
       orderBy: query.orderBy,
-      // @ts-expect-error
-      fields: query.fields,
+      fields: query.fields as never[],
       limit: query.limit,
       offset: query.offset,
       filters,

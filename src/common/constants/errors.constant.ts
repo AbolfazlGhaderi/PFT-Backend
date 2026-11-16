@@ -82,7 +82,7 @@ export const API_ERROR_CODES = {
   },
   PAGINATION_PARAM_INCORRECT: {
     message: 'PaginationParams are incorrect',
-    HttpStatusCode: 422,
+    HttpStatusCode: 400,
     errorCode: 2015,
   },
   USER_ROLE_NOT_FOUND: {

@@ -15,8 +15,8 @@ import { FinancialAccountRepository } from '@database/repositories/financial-acc
 @Entity({ tableName: TABLE_NAMES.FINANCIAL_ACCOUNT, repository: () => FinancialAccountRepository })
 @ApplyDeletedFilter()
 @Unique({
-    properties: ['user', 'title'],
-    where: { isDeleted: 0 },
+  properties: ['user', 'title'],
+  where: { isDeleted: 0 },
 })
 export class FinancialAccountEntity {
   [EntityRepositoryType]?: FinancialAccountRepository;

@@ -59,7 +59,7 @@ async function loadEntities(): Promise<Provider[]> {
   for (const file of files) {
     if (!file.endsWith('.entity.js') || file.startsWith('base.')) continue;
 
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    // oxlint-disable-next-line typescript/no-unsafe-assignment
     const imported = await import(pathToFileURL(join(entityPath, file)).href);
 
     Object.values(imported).forEach(exported => {
@@ -82,7 +82,7 @@ async function loadRepositories(): Promise<Provider[]> {
   for (const file of files) {
     if (!file.endsWith('.repository.js') || file.startsWith('base.')) continue;
 
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    // oxlint-disable-next-line typescript/no-unsafe-assignment
     const imported = await import(pathToFileURL(join(repositoryPath, file)).href);
 
     Object.values(imported).forEach(exported => {

@@ -12,8 +12,8 @@ import { BeforeCreate, BeforeUpdate, Entity, OneToOne, Property, Unique } from '
 @Entity({ tableName: TABLE_NAMES.USER_SECURITY, repository: () => UserSecurityRepository })
 @ApplyDeletedFilter()
 @Unique({
-    properties: ['user'],
-    where: { isDeleted: 0 },
+  properties: ['user'],
+  where: { isDeleted: 0 },
 })
 export class UserSecurityEntity {
   [EntityRepositoryType]?: UserSecurityRepository;

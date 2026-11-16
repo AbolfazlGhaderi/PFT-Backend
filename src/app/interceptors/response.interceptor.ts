@@ -3,7 +3,7 @@ import { from, Observable } from 'rxjs';
 import { ClsService } from 'nestjs-cls';
 import { isEmpty } from 'class-validator';
 import { mergeMap } from 'rxjs/operators';
-import { Request, Response } from 'express';
+import { Request } from 'express';
 import { paginationGenerator } from '@utils';
 import { LoggerService } from 'logger-nestjs';
 import { ApiResponseT, DefaultSuccessResponseT, PaginationT } from '@types';
@@ -43,6 +43,7 @@ export class ResponseInterceptor implements NestInterceptor {
         try {
           record[key] = await value.decrypt();
         } catch (error) {
+          // oxlint-disable-next-line typescript/restrict-template-expressions
           this.logger.error(`Failed to decrypt field "${key}": ${error}`);
           record[key] = value;
         }
@@ -67,13 +68,11 @@ export class ResponseInterceptor implements NestInterceptor {
       this.logger.error('ClsService must be active!');
       throw new HttpException('', HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    const requestId = this.clsService.get(CLS_KEYS.REQUEST_ID);
-    const response = context.switchToHttp().getResponse<Response>();
-    const { statusCode } = response;
+    const requestId = this.clsService.get<string>(CLS_KEYS.REQUEST_ID);
+    // const response = context.switchToHttp().getResponse<Response>();
 
     const responseObject: DefaultSuccessResponseT = {
       ok: true,
-      statusCode,
       timestamp: Date.now(),
       data: {},
     };
@@ -98,12 +97,14 @@ export class ResponseInterceptor implements NestInterceptor {
             this.logger.warn('Pagination params is incorrect, missing page or limit param');
           }
           responseObject['data'] = paginationGenerator(result.data.total, page, limit);
+          // oxlint-disable-next-line typescript/no-unsafe-member-access
           responseObject['data']['items'] = await this.decryptFields(result.data.items);
           break;
         }
         case 'withoutResponse':
           break;
         default: {
+          // oxlint-disable-next-line typescript/restrict-template-expressions
           throw new Error(`Invalid response type: ${result}`);
         }
       }

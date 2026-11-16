@@ -9,8 +9,8 @@ import { IdT } from '@database/common/types/id.type.js';
 @Entity({ tableName: TABLE_NAMES.CURRENCY, repository: () => CurrencyRepository })
 @ApplyDeletedFilter()
 @Unique({
-    properties: ['code'],
-    where: { isDeleted: 0 },
+  properties: ['code'],
+  where: { isDeleted: 0 },
 })
 export class CurrencyEntity {
   [EntityRepositoryType]?: CurrencyRepository;
