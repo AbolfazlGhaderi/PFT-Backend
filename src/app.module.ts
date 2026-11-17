@@ -13,6 +13,7 @@ import { FinancialAccountModule } from './modules/financial-account/financial-ac
 import { TransactionModule } from './modules/transaction/transaction.module.js';
 import { DebtModule } from './modules/debt/debt.module.js';
 import { DebtPaymentModule } from './modules/debt-payment/debt-payment.module.js';
+import { ConfigModule } from './modules/config/config.module.js';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { DebtPaymentModule } from './modules/debt-payment/debt-payment.module.js
     TransactionModule,
     DebtModule,
     DebtPaymentModule,
+    ConfigModule,
   ],
   controllers: [AppController],
   providers: [AppService, InitializerService],

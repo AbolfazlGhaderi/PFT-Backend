@@ -7,3 +7,4 @@ export * from './category.repository.js';
 export * from './transaction.repository.js';
 export * from './debt.repository.js';
 export * from './debt-payment.repository.js';
+export * from './config.repository.js';

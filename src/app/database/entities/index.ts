@@ -6,3 +6,4 @@ export * from './category.entity.js';
 export * from './transaction.entity.js';
 export * from './debt.entity.js';
 export * from './debt-payment.entity.js';
+export * from './config.entity.js';
