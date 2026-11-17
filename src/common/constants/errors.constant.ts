@@ -171,6 +171,11 @@ export const API_ERROR_CODES = {
     HttpStatusCode: 404,
     errorCode: 2032,
   },
+  CURRENCY_CODE_ALREADY_EXISTS: {
+    message: 'Currency code already exists',
+    HttpStatusCode: 409,
+    errorCode: 2044,
+  },
 
   TRANSACTION_NOT_FOUND: {
     message: 'Transaction not found',

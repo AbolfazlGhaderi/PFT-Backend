@@ -14,6 +14,7 @@ import { TransactionModule } from './modules/transaction/transaction.module.js';
 import { DebtModule } from './modules/debt/debt.module.js';
 import { DebtPaymentModule } from './modules/debt-payment/debt-payment.module.js';
 import { ConfigModule } from './modules/config/config.module.js';
+import { CurrencyModule } from './modules/currency/currency.module.js';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { ConfigModule } from './modules/config/config.module.js';
     DebtModule,
     DebtPaymentModule,
     ConfigModule,
+    CurrencyModule,
   ],
   controllers: [AppController],
   providers: [AppService, InitializerService],
