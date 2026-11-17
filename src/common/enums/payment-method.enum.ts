@@ -1,6 +1,6 @@
 export enum PaymentMethodENUM {
-  CASH = 0,
-  CARD = 1,
+  CASH = 1,
+  CARD = 2,
   ONLINE_PAYMENT,
   CARD_TO_CARD,
   BRIDGE,

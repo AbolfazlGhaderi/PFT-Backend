@@ -20,6 +20,9 @@ export class TransactionEntity {
   @PrimaryColumn()
   id!: number;
 
+  @Property({ fieldName: 'Title', type: 'varchar', length: 255 })
+  title!: string;
+
   @Property({ fieldName: 'Type', type: 'tinyint', default: TransactionTypeENUM.EXPENSE })
   type!: number;
 
@@ -46,6 +49,9 @@ export class TransactionEntity {
 
   @Property({ fieldName: 'PaymentMethod', type: 'smallint', default: PaymentMethodENUM.CARD })
   paymentMethod!: number;
+
+  @Property({ fieldName: 'PaymentDate', type: 'timestamptz', onCreate: () => new Date(), defaultRaw: 'CURRENT_TIMESTAMP' })
+  paymentDate!: Date;
 
   @Property({ fieldName: 'Description', type: 'text', nullable: true })
   description?: string;

@@ -16,6 +16,10 @@ export function ApiUpdateTransactionSwaggerConfig() {
             type: 'number',
             description: 'Transaction ID',
           },
+          title: {
+            type: 'string',
+            description: 'Transaction title (max 255 chars)',
+          },
           type: {
             type: 'number',
             description: '1: Expense, 2: Income, 3: Transfer',
@@ -69,6 +73,7 @@ Fields that you can use:
 | Field name      | Type     | Format          |
 |-----------------|----------|-----------------|
 | id              | number   | REQUIRED        |
+| title           | string   | OPTIONAL        |
 | type            | number   | OPTIONAL        |
 | accountId       | number   | OPTIONAL        |
 | toAccountId     | number   | OPTIONAL        |

@@ -12,6 +12,10 @@ export function ApiCreateTransactionSwaggerConfig() {
       schema: {
         type: 'object',
         properties: {
+          title: {
+            type: 'string',
+            description: 'Transaction title (max 255 chars)',
+          },
           type: {
             type: 'number',
             description: '1: Expense, 2: Income, 3: Transfer',
@@ -72,6 +76,7 @@ Rules:
 `,
           value: {
             type: 1,
+            Title: 'Grocery Shopping',
             accountId: 1,
             categoryId: 1,
             amount: '1000.50',

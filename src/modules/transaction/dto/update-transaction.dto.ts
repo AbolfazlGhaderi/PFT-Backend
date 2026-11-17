@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsNumber, IsNumberString, IsOptional, IsString, MaxLength } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsISO8601, IsNumber, IsNumberString, IsOptional, IsString, MaxLength } from 'class-validator';
 
 import { PaymentMethodENUM, TransactionTypeENUM } from '@enums';
 
@@ -8,6 +8,12 @@ export class UpdateTransactionDTO {
   @IsNumber()
   @IsNotEmpty()
   id!: number;
+
+  @ApiProperty({ example: 'Grocery Shopping', description: 'Transaction title (max 255 chars)', required: false })
+  @IsString()
+  @IsOptional()
+  @MaxLength(255)
+  title?: string;
 
   @ApiProperty({ example: TransactionTypeENUM.EXPENSE, description: '1: Expense, 2: Income, 3: Transfer', required: false })
   @IsEnum(TransactionTypeENUM)
@@ -52,6 +58,11 @@ export class UpdateTransactionDTO {
   @IsEnum(PaymentMethodENUM)
   @IsOptional()
   paymentMethod?: number;
+
+  @ApiProperty({ example: '2026-11-17T10:00:00.000Z', description: 'Payment date (ISO 8601)', required: false })
+  @IsISO8601()
+  @IsOptional()
+  paymentDate?: string;
 
   @ApiProperty({ example: 'Grocery shopping', description: 'Description', required: false })
   @IsString()

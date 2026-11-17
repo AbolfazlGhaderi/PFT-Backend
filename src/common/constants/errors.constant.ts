@@ -176,6 +176,11 @@ export const API_ERROR_CODES = {
     HttpStatusCode: 409,
     errorCode: 2044,
   },
+  CATEGORY_KEY_ALREADY_EXISTS: {
+    message: 'Category key already exists',
+    HttpStatusCode: 409,
+    errorCode: 2045,
+  },
 
   TRANSACTION_NOT_FOUND: {
     message: 'Transaction not found',

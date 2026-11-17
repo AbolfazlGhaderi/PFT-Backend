@@ -67,6 +67,7 @@ export class TransactionService {
       }
 
       const transaction = tem.create(TransactionEntity, {
+        title: createTransactionDTO.title,
         account,
         toAccount,
         category,
@@ -76,6 +77,7 @@ export class TransactionService {
         discountAmount,
         totalAmount,
         paymentMethod: createTransactionDTO.paymentMethod ?? PaymentMethodENUM.CARD,
+        paymentDate: createTransactionDTO.paymentDate ? new Date(createTransactionDTO.paymentDate) : new Date(),
         description: createTransactionDTO.description,
         invoice: createTransactionDTO.invoice,
         isDeleted: 0,
@@ -151,6 +153,7 @@ export class TransactionService {
       transaction.discountAmount = discountAmount;
       transaction.totalAmount = totalAmount;
       if (updateTransactionDTO.paymentMethod !== undefined) transaction.paymentMethod = updateTransactionDTO.paymentMethod;
+      if (updateTransactionDTO.paymentDate) transaction.paymentDate = new Date(updateTransactionDTO.paymentDate);
       if (updateTransactionDTO.description !== undefined) transaction.description = updateTransactionDTO.description;
       if (updateTransactionDTO.invoice !== undefined) transaction.invoice = updateTransactionDTO.invoice;
 
@@ -246,6 +249,7 @@ export class TransactionService {
   private toResponseData(transaction: TransactionEntity) {
     return {
       id: transaction.id,
+      title: transaction.title,
       type: transaction.type,
       accountId: transaction.account.id,
       toAccountId: transaction.toAccount?.id ?? null,
@@ -255,6 +259,7 @@ export class TransactionService {
       discountAmount: transaction.discountAmount,
       totalAmount: transaction.totalAmount,
       paymentMethod: transaction.paymentMethod,
+      paymentDate: transaction.paymentDate,
       description: transaction.description,
       invoice: transaction.invoice,
     };

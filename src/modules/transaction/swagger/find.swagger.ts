@@ -49,6 +49,7 @@ export function ApiFindAllTransactionSwaggerConfig() {
                   items: [
                     {
                       id: 1,
+                      title: 'Grocery Shopping',
                       type: 1,
                       account: 1,
                       toAccount: null,
