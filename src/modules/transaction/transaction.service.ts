@@ -5,6 +5,7 @@ import { LoggerService } from 'logger-nestjs';
 import { ClsService } from 'nestjs-cls';
 
 import { CategoryEntity } from '@database/entities/category.entity.js';
+import { DebtPaymentEntity } from '@database/entities/debt-payment.entity.js';
 import { FinancialAccountEntity } from '@database/entities/financial-account.entity.js';
 import { TransactionEntity } from '@database/entities/transaction.entity.js';
 import { TransactionRepository } from '@database/repositories/transaction.repository.js';
@@ -178,6 +179,12 @@ export class TransactionService {
       if (!transaction) {
         this.logger.error(`Transaction not found with ID: ${id}`);
         throw new ApiException(API_ERROR_CODES.TRANSACTION_NOT_FOUND);
+      }
+
+      const debtPayment = await tem.findOne(DebtPaymentEntity, { transaction: id });
+      if (debtPayment) {
+        this.logger.error(`Cannot delete transaction with ID: ${id} because it is linked to debt payment with ID: ${debtPayment.id}`);
+        throw new ApiException(API_ERROR_CODES.TRANSACTION_ATTACHED_TO_DEBT_PAYMENT);
       }
 
       // revert the balance effect so the deleted transaction no longer counts

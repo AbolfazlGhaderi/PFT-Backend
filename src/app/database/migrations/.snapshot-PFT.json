@@ -1164,6 +1164,23 @@
           "enumItems": [],
           "mappedType": "bigint"
         },
+        "NextPaymentDate": {
+          "name": "NextPaymentDate",
+          "type": "timestamptz(6)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "unique": false,
+          "length": 6,
+          "precision": null,
+          "scale": null,
+          "default": null,
+          "comment": null,
+          "collation": null,
+          "enumItems": [],
+          "mappedType": "datetime"
+        },
         "RecordKey": {
           "name": "RecordKey",
           "type": "varchar(36)",

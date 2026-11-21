@@ -233,4 +233,9 @@ export const API_ERROR_CODES = {
     HttpStatusCode: 422,
     errorCode: 2043,
   },
+  TRANSACTION_ATTACHED_TO_DEBT_PAYMENT: {
+    message: 'Cannot delete transaction because it is linked to a debt payment',
+    HttpStatusCode: 400,
+    errorCode: 2044,
+  },
 };
