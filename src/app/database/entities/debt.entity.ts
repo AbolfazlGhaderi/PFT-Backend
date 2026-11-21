@@ -53,6 +53,9 @@ export class DebtEntity {
   @Property({ fieldName: 'DueDate', type: 'timestamptz', nullable: true })
   dueDate?: Date;
 
+  @Property({ fieldName: 'NextPaymentDate', type: 'timestamptz', nullable: true })
+  nextPaymentDate?: Date;
+
   @Property({ fieldName: 'Description', type: 'text', nullable: true })
   description?: string;
 

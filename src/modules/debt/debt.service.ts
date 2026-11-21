@@ -62,6 +62,7 @@ export class DebtService {
       totalInstallments: createDebtDTO.totalInstallments,
       installmentInterval: createDebtDTO.installmentInterval ?? InstallmentIntervalENUM.ONE_TIME,
       dueDate: createDebtDTO.dueDate ? new Date(createDebtDTO.dueDate) : undefined,
+      nextPaymentDate: createDebtDTO.nextPaymentDate ? new Date(createDebtDTO.nextPaymentDate) : undefined,
       description: createDebtDTO.description,
       isDeleted: 0,
     });
@@ -97,6 +98,7 @@ export class DebtService {
     debt.totalInstallments = updateDebtDTO.totalInstallments ?? debt.totalInstallments;
     debt.installmentInterval = updateDebtDTO.installmentInterval ?? debt.installmentInterval;
     if (updateDebtDTO.dueDate) debt.dueDate = new Date(updateDebtDTO.dueDate);
+    if (updateDebtDTO.nextPaymentDate) debt.nextPaymentDate = new Date(updateDebtDTO.nextPaymentDate);
     debt.description = updateDebtDTO.description ?? debt.description;
 
     await this.em.flush();
@@ -142,6 +144,7 @@ export class DebtService {
       totalInstallments: debt.totalInstallments,
       installmentInterval: debt.installmentInterval,
       dueDate: debt.dueDate,
+      nextPaymentDate: debt.nextPaymentDate,
       description: debt.description,
     };
   }

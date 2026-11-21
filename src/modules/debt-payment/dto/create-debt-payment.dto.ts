@@ -27,6 +27,11 @@ export class CreateDebtPaymentDTO {
   @IsOptional()
   paidAt?: string;
 
+  @ApiProperty({ example: '2026-12-15T00:00:00.000Z', description: 'Next payment date for the debt (ISO 8601)', required: false })
+  @IsISO8601()
+  @IsOptional()
+  nextPaymentDate?: string;
+
   @ApiProperty({ example: 'Third installment', description: 'Description', required: false })
   @IsString()
   @IsOptional()

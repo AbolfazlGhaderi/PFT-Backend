@@ -8,6 +8,11 @@ export function ApiFindAllConfigSwaggerConfig() {
     ApiTags(API_TAG),
     ApiBearerAuth('Authorization'),
     ApiOperation({ summary: 'Find Configs' }),
-    ApiQuery({ name: 'queries', required: false, type: 'object', examples: { simpleRequest: { value: { page: 1, limit: 15, fields: ['*'], orderBy: { id: 'DESC' }, where: {} } } } }),
+    ApiQuery({
+      name: 'queries',
+      required: false,
+      type: 'object',
+      examples: { simpleRequest: { value: { page: 1, limit: 15, fields: ['*'], orderBy: { id: 'DESC' }, where: {} } } },
+    }),
   );
 }

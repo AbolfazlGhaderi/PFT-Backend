@@ -56,6 +56,10 @@ export class DebtPaymentService {
       throw new ApiException(API_ERROR_CODES.TRANSACTION_NOT_FOUND);
     }
 
+    if (createDebtPaymentDTO.nextPaymentDate) {
+      debt.nextPaymentDate = new Date(createDebtPaymentDTO.nextPaymentDate);
+    }
+
     const debtPayment = this.debtPaymentRepository.create({
       debt,
       transaction,

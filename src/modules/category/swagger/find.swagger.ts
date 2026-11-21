@@ -8,6 +8,11 @@ export function ApiFindAllCategorySwaggerConfig() {
     ApiTags(API_TAG),
     ApiBearerAuth('Authorization'),
     ApiOperation({ summary: 'Find Categories' }),
-    ApiQuery({ name: 'queries', required: false, type: 'object', examples: { simpleRequest: { value: { page: 1, limit: 15, fields: ['*'], orderBy: { id: 'DESC' }, where: {} } } } }),
+    ApiQuery({
+      name: 'queries',
+      required: false,
+      type: 'object',
+      examples: { simpleRequest: { value: { page: 1, limit: 15, fields: ['*'], orderBy: { id: 'DESC' }, where: {} } } },
+    }),
   );
 }
